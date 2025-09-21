@@ -1,0 +1,32 @@
+flavors:
+  # DEV
+  dev:
+    app:
+      name: "Template (DEV)"
+    android:
+      applicationId: "com.template.template.dev"
+      icon: "assets/images/dev/launcher.png"
+    ios:
+      bundleId: "com.template.template.dev"
+      icon: "assets/images/dev/launcher.png"
+      # firebase:
+      #   config: ".firebase/dev/GoogleService-Info.plist"
+
+  # PROD
+  prod:
+    app:
+      name: "Template"
+    android:
+      applicationId: "com.template.template"
+      icon: "assets/images/launcher.png"
+    ios:
+      bundleId: "com.template.template"
+      icon: "assets/images/launcher.png"
+      # firebase:
+      #   config: ".firebase/prod/GoogleService-Info.plist"
+      
+instructions:
+  - android
+  - ios
+  - assets
+  - firebase

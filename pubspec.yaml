@@ -90,6 +90,7 @@ dev_dependencies:
   flutter_launcher_icons: ^0.14.4
   flutter_native_splash: ^2.4.6
   rename: ^3.1.0
+  flutter_flavorizr: ^2.4.1
 
   # ========================================
   # Code Generation Tools

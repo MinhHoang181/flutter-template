@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart' show TextStyle, FontWeight;
+import 'package:template/gen/fonts.gen.dart';
 
 class AppFonts {
   AppFonts._();
 
   // TODO: Add font families
-  static const String fontFamily = 'Roboto';
+  static const String fontFamily = FontFamily.roboto;
 
   // Size 11
   static const TextStyle size11Regular = TextStyle(fontSize: 11, fontWeight: FontWeight.w400, height: 16 / 11);

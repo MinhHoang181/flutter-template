@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:template/gen/assets.gen.dart';
 
 @module
 abstract class AppModule {
@@ -18,7 +19,7 @@ abstract class AppModule {
 
   @preResolve
   Future<env.DotEnv> get dotenv async {
-    await env.dotenv.load(fileName: '.env');
+    await env.dotenv.load(fileName: Assets.aEnv);
     return env.dotenv;
   }
 

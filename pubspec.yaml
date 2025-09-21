@@ -114,8 +114,11 @@ flutter_gen:
   assets:
     outputs:
       style: dot-delimiter
+      directory_path_enabled: true
+    exclude:
+      - assets/fonts/**
   fonts:
-    enabled: false
+    enabled: true
 
 flutter:
   uses-material-design: true

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:template/gen/assets.gen.dart';
 
 export 'package:easy_localization/easy_localization.dart' show BuildContextEasyLocalizationExtension;
 
@@ -18,7 +19,7 @@ class AppLocalization extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EasyLocalization(
-      path: 'assets/translations',
+      path: Assets.translations.path,
       supportedLocales: supportedLocales,
       startLocale: supportedLocales.first,
       fallbackLocale: supportedLocales.first,

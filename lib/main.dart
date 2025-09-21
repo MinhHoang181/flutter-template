@@ -11,8 +11,6 @@ import 'package:template/core/presentation/widgets/flavor_banner.dart';
 void main() async {
   await _preRunApp();
 
-  await Future.delayed(const Duration(seconds: 5));
-
   runApp(_app());
 }
 

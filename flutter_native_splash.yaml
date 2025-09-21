@@ -1,0 +1,70 @@
+flutter_native_splash:
+  # Cấu hình splash screen cho Flutter app
+  # Chạy: dart run flutter_native_splash:create
+  # Xóa: dart run flutter_native_splash:remove
+
+  # Màu nền splash screen (bắt buộc)
+  color: "#FFFFFF"
+  # background_image: "assets/background.png"
+
+  # Hình ảnh chính trên splash screen
+  image: assets/images/splash.png
+
+  # Hình ảnh branding (logo)
+  # branding: assets/dart.png
+  # branding_mode: bottom
+  # branding_bottom_padding: 24
+
+  # Cấu hình cho chế độ tối
+  # color_dark: "#042a49"
+  # background_image_dark: "assets/dark-background.png"
+  # image_dark: assets/splash-invert.png
+  # branding_dark: assets/dart_dark.png
+
+  # Cấu hình riêng cho Android 12+
+  android_12:
+    image: assets/images/splash.png
+    color: "#FFFFFF"
+    # icon_background_color: "#111111"
+    # branding: assets/dart.png
+    # image_dark: assets/android12splash-invert.png
+    # color_dark: "#042a49"
+    # icon_background_color_dark: "#eeeeee"
+
+  # Tắt splash screen cho platform cụ thể
+  # android: false
+  # ios: false
+
+  # Cấu hình platform cụ thể
+  # color_android: "#42a5f5"
+  # color_dark_android: "#042a49"
+  # color_ios: "#42a5f5"
+  # color_dark_ios: "#042a49"
+  # image_android: assets/splash-android.png
+  # image_dark_android: assets/splash-invert-android.png
+  # image_ios: assets/splash-ios.png
+  # image_dark_ios: assets/splash-invert-ios.png
+  # background_image_android: "assets/background-android.png"
+  # background_image_dark_android: "assets/dark-background-android.png"
+  # background_image_ios: "assets/background-ios.png"
+  # background_image_dark_ios: "assets/dark-background-ios.png"
+  # branding_android: assets/brand-android.png
+  # branding_bottom_padding_android: 24
+  # branding_dark_android: assets/dart_dark-android.png
+  # branding_ios: assets/brand-ios.png
+  # branding_bottom_padding_ios: 24
+  # branding_dark_ios: assets/dart_dark-ios.png
+
+  # Vị trí hình ảnh
+  # android_gravity: center
+  # ios_content_mode: center
+
+  # Hướng màn hình Android
+  # android_screen_orientation: sensorLandscape
+
+  # fullscreen: true
+
+  # File info.plist tùy chỉnh
+  # info_plist_files:
+  #   - 'ios/Runner/Info-Debug.plist'
+  #   - 'ios/Runner/Info-Release.plist'

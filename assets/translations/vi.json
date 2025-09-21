@@ -1,0 +1,46 @@
+{
+    "core": {
+        "error_screen": {
+            "app_bar": "Lỗi điều hướng",
+            "message": "Đã có lỗi xảy ra, vui lòng thử lại",
+            "back_home": "Quay về trang chủ"
+        },
+        "dialog": {
+            "confirm": {
+                "title": "Thực hiện hành động!",
+                "button": {
+                    "confirm": "Xác nhận",
+                    "cancel": "Hủy"
+                }
+            },
+            "warning": {
+                "title": "Cảnh báo!",
+                "button": {
+                    "confirm": "Xác nhận",
+                    "cancel": "Hủy"
+                }
+            },
+            "success": {
+                "title": "Thành công!",
+                "button": {
+                    "close": "Đóng"
+                }
+            },
+            "error": {
+                "title": "Đã có lỗi xảy ra!",
+                "button": {
+                    "close": "Đóng"
+                }
+            }
+        },
+        "version": "Phiên bản"
+    },
+    "splash": {
+        "error_dialog": {
+            "message": "Khởi tạo ứng dụng thất bại, vui lòng thử lại",
+            "button": {
+                "retry": "Thử lại"
+            }
+        }
+    }
+}

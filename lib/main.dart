@@ -1,0 +1,126 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:template/app/app.dart';
+import 'package:template/app/dependencies/injectable.dart';
+import 'package:template/app/services/app_localization.dart';
+import 'package:template/app/services/app_theme_manager.dart';
+import 'package:template/core/constants/env_constants.dart';
+import 'package:template/core/presentation/widgets/flavor_banner.dart';
+
+void main() async {
+  await _preRunApp();
+
+  await Future.delayed(const Duration(seconds: 5));
+
+  runApp(_app());
+}
+
+Widget _app() {
+  Widget app = const _App();
+
+  // localization
+  app = AppLocalization(child: app);
+
+  // theme management
+  app = AppThemeManager(child: app);
+
+  return app;
+}
+
+Future<void> _preRunApp() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
+  await configureDependencies();
+
+  await AppThemeManager.ensureInitialized();
+  await AppLocalization.ensureInitialized();
+}
+
+Future<void> initializeApp() async {
+  if (initializeAppCompleter.isCompleted) return;
+  initializeAppCompleter.complete(null);
+}
+
+class _App extends StatefulWidget {
+  const _App();
+
+  @override
+  State<_App> createState() => _AppState();
+}
+
+class _AppState extends State<_App> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+      // App is resumed
+      case AppLifecycleState.paused:
+      // App is paused
+      case AppLifecycleState.inactive:
+      // App is inactive (e.g., during a phone call)
+      case AppLifecycleState.detached:
+      // App is detached from the view hierarchy
+      case AppLifecycleState.hidden:
+      // App is hidden (e.g., when the user switches to another app)
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FlavorBanner(
+      isShow: !(getIt.get<DotEnv>().env[EnvConstants.ENV]?.toUpperCase().trim() == 'PROD'),
+      env: getIt.get<DotEnv>().env[EnvConstants.ENV],
+      child: MaterialApp.router(
+        // app theme manager
+        theme: context.lightTheme,
+        darkTheme: context.darkTheme,
+        themeMode: context.themeMode,
+        // app localization
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        // app router
+        routeInformationProvider: App.router.routeInformationProvider,
+        routeInformationParser: App.router.routeInformationParser,
+        routerDelegate: App.router.routerDelegate,
+        //--
+        debugShowCheckedModeBanner: false,
+        builder: _customBuilder,
+      ),
+    );
+  }
+
+  Widget _customBuilder(BuildContext context, Widget? child) {
+    // check null
+    child ??= const SizedBox.shrink();
+
+    // unfocus when tap
+    child = GestureDetector(onTap: FocusManager.instance.primaryFocus?.unfocus, child: child);
+
+    // no scaling text
+    child = MediaQuery(
+      data: MediaQuery.of(
+        context,
+      ).copyWith(textScaler: MediaQuery.textScalerOf(context).clamp(minScaleFactor: 1.0, maxScaleFactor: 1.2)),
+      child: child,
+    );
+
+    return child;
+  }
+}

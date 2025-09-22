@@ -29,6 +29,8 @@ mason-lock.json
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
 .vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
 
 # Flutter/Dart/Pub related
 **/doc/api/

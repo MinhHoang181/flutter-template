@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "set-env-dev",
+        "type": "shell",
+        "command": "cp .env.dev .env",
+        "presentation": {
+          "reveal": "never",
+        }
+      },
+      {
+        "label": "set-env-prod",
+        "type": "shell",
+        "command": "cp .env.prod .env",
+        "presentation": {
+          "reveal": "never",
+        }
+      }
+    ]
+  } 

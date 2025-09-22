@@ -121,6 +121,7 @@ flutter_gen:
     enabled: true
 
 flutter:
+  default-flavor: prod
   uses-material-design: true
   assets:
     - .env

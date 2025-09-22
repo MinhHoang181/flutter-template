@@ -2,7 +2,7 @@
     "version": "1.0.0",
     "configurations": [
       {
-        "name": "Flutter iOS dev",
+        "name": "Flutter dev",
         "request": "launch",
         "type": "dart",
         "flutterMode": "debug",
@@ -12,10 +12,13 @@
         "preLaunchTask": "set-env-dev",
       },
       {
-        "name": "Flutter iOS prod",
+        "name": "Flutter prod",
         "request": "launch",
         "type": "dart",
         "flutterMode": "debug",
+        "args": [
+          "--flavor", "prod",                  
+        ],
         "preLaunchTask": "set-env-prod",
       },
     ]

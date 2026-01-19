@@ -2,9 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:template/app/root/screens/navigation_error_screen.dart';
-import 'package:template/app/root/screens/root_screen.dart';
-import 'package:template/app/root/screens/splash_screen.dart';
 import 'package:template/app/route/data/app_route_data.dart';
 import 'package:template/app/route/data/app_router_observer.dart';
 import 'package:template/app/route/data/app_stateful_shell_route_data.dart';
@@ -12,6 +9,9 @@ import 'package:template/app/route/data/app_transition_page.dart';
 import 'package:template/app/route/redirect/app_redirect.dart';
 import 'package:template/app/route/redirect/splash_redirect.dart';
 import 'package:template/features/home/presentation/screens/home_screen.dart';
+import 'package:template/features/shared_presentation/screens/navigation_error_screen.dart';
+import 'package:template/features/shared_presentation/screens/root_screen.dart';
+import 'package:template/features/shared_presentation/screens/splash_screen.dart';
 
 part 'route.g.dart';
 part 'src/_root_route.dart';
@@ -36,7 +36,8 @@ class AppRouter {
 
   GoRouter get router => _router;
 
-  final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> _rootNavigatorKey =
+      GlobalKey<NavigatorState>();
   GlobalKey<NavigatorState> get rootNavigatorKey => _rootNavigatorKey;
 
   void _initialize() {
@@ -56,7 +57,11 @@ class AppRouter {
         );
       },
       redirect: (context, state) {
-        final String? location = AppRedirect.check(context, state, list: [const SplashRedirect()]);
+        final String? location = AppRedirect.check(
+          context,
+          state,
+          list: [const SplashRedirect()],
+        );
 
         return location;
       },

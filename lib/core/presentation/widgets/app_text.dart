@@ -33,7 +33,7 @@ class AppText extends StatelessWidget {
     this.strutStyle,
     this.textAlign,
     this.textDirection,
-    TextOverflow? overflow,
+    TextOverflow? overflow = TextOverflow.ellipsis,
     this.textScaler,
     int? maxLines = 1,
     this.textWidthBasis,
@@ -120,7 +120,6 @@ class AppText extends StatelessWidget {
   /// widget directly to entirely override the [DefaultTextStyle].
   final int? maxLines;
 
-  /// {@template flutter.widgets.Text.semanticsLabel}
   /// An alternative semantics label for this text.
   ///
   /// If present, the semantics of this widget will contain this value instead
@@ -133,7 +132,6 @@ class AppText extends StatelessWidget {
   /// ```dart
   /// const Text(r'$$', semanticsLabel: 'Double dollars')
   /// ```
-  /// {@endtemplate}
   final String? semanticsLabel;
 
   /// {@macro flutter.painting.textPainter.textWidthBasis}

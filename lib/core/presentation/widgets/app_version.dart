@@ -1,7 +1,7 @@
+import 'package:core_extension/core_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:template/app/app.dart';
-import 'package:template/app/dependencies/injectable.dart';
 import 'package:template/app/services/app_info.dart';
 import 'package:template/core/constants/env_constants.dart';
 import 'package:template/core/presentation/widgets/app_text.dart';
@@ -14,7 +14,14 @@ class AppVersion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String version = getIt<AppInfo>().version(showBuildNumber: getIt<DotEnv>().env[EnvConstants.ENV] != 'PROD');
+    final String version = getIt<AppInfo>().version(
+      showBuildNumber:
+          getIt<DotEnv>().env
+              .getString(EnvConstants.ENV)
+              .toUpperCase()
+              .trim() !=
+          'PROD',
+    );
 
     return AppText.rich(
       textAlign: TextAlign.center,
@@ -22,7 +29,10 @@ class AppVersion extends StatelessWidget {
       TextSpan(
         children: [
           TextSpan(
-            text: context.text(LocaleKeys.core.version, defaultValue: 'Phiên bản'),
+            text: context.text(
+              LocaleKeys.core.version,
+              defaultValue: 'Phiên bản',
+            ),
             style: context.textTheme.labelMedium.copyWith(
               fontWeight: FontWeight.w500,
               color: context.colorScheme.onSurfaceVariant,

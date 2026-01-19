@@ -24,7 +24,7 @@ abstract class AppModule {
   }
 
   FlutterSecureStorage get secureStorage => const FlutterSecureStorage(
-    aOptions: AndroidOptions(encryptedSharedPreferences: true),
-    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
+    aOptions: AndroidOptions.defaultOptions,
+    iOptions: IOSOptions.defaultOptions,
   );
 }

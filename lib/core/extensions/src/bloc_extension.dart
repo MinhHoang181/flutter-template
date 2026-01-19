@@ -5,7 +5,9 @@ extension BlocContextExt on BuildContext {
     return BlocProvider.of(this, listen: listen);
   }
 
-  T? blocOrNull<T extends StateStreamableSource<Object?>>({bool listen = false}) {
+  T? blocOrNull<T extends StateStreamableSource<Object?>>({
+    bool listen = false,
+  }) {
     try {
       return BlocProvider.of(this, listen: listen);
     } catch (_) {

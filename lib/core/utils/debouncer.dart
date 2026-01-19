@@ -1,9 +1,7 @@
 import 'dart:async';
 
 class Debouncer {
-  Debouncer({
-    required this.milliseconds,
-  });
+  Debouncer({required this.milliseconds});
 
   final int milliseconds;
 

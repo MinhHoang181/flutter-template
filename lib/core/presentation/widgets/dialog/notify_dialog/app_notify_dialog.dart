@@ -1,21 +1,31 @@
+import 'dart:developer';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:template/app/app.dart';
-import 'package:template/core/presentation/widgets/app_button.dart';
-import 'package:template/core/presentation/widgets/app_text.dart';
-import 'package:template/core/presentation/widgets/dialog/app_dialog.dart';
-import 'package:template/core/theme/app_colors.dart';
-import 'package:template/core/theme/app_fonts.dart';
-import 'package:template/core/theme/app_spacing.dart';
-import 'package:template/core/theme/app_theme.dart';
+
 import 'package:template/gen/locale_keys.gen.dart';
 
+import '../../../../theme/app_colors/app_colors.dart';
+import '../../../../theme/app_fonts.dart';
+import '../../../../theme/app_spacing.dart';
+import '../../../../theme/app_theme.dart';
+import '../../app_button/app_button.dart';
+import '../../app_text.dart';
+import '../app_dialog.dart';
+
 part 'src/app_confirm_dialog.dart';
+part 'src/app_develop_dialog.dart';
 part 'src/app_error_dialog.dart';
 part 'src/app_success_dialog.dart';
 part 'src/app_warning_dialog.dart';
 
 abstract class AppNotifyDialog extends StatelessWidget {
-  const AppNotifyDialog({super.key, required this.title, required this.message});
+  const AppNotifyDialog({
+    super.key,
+    required this.title,
+    required this.message,
+  });
 
   factory AppNotifyDialog.confirm({
     Key? key,
@@ -28,7 +38,12 @@ abstract class AppNotifyDialog extends StatelessWidget {
   }) {
     return _ConfirmDialog(
       key: key,
-      title: title ?? App.text(LocaleKeys.core.dialog.confirm.title, defaultValue: 'Thực hiện hành động!'),
+      title:
+          title ??
+          App.text(
+            LocaleKeys.core.dialog.confirm.title,
+            defaultValue: 'Thực hiện hành động!',
+          ),
       message: message,
       primaryLabel: primaryLabel,
       secondaryLabel: secondaryLabel,
@@ -48,7 +63,12 @@ abstract class AppNotifyDialog extends StatelessWidget {
   }) {
     return _AppWarningDialog(
       key: key,
-      title: title ?? App.text(LocaleKeys.core.dialog.warning.title, defaultValue: 'Cảnh báo!'),
+      title:
+          title ??
+          App.text(
+            LocaleKeys.core.dialog.warning.title,
+            defaultValue: 'Cảnh báo!',
+          ),
       message: message,
       primaryLabel: primaryLabel,
       secondaryLabel: secondaryLabel,
@@ -68,7 +88,12 @@ abstract class AppNotifyDialog extends StatelessWidget {
   }) {
     return _AppSuccessDialog(
       key: key,
-      title: title ?? App.text(LocaleKeys.core.dialog.success.title, defaultValue: 'Thành công!'),
+      title:
+          title ??
+          App.text(
+            LocaleKeys.core.dialog.success.title,
+            defaultValue: 'Thành công!',
+          ),
       message: message,
       primaryLabel: primaryLabel,
       secondaryLabel: secondaryLabel,
@@ -88,7 +113,12 @@ abstract class AppNotifyDialog extends StatelessWidget {
   }) {
     return _AppErrorDialog(
       key: key,
-      title: title ?? App.text(LocaleKeys.core.dialog.error.title, defaultValue: 'Đã có lỗi xảy ra!'),
+      title:
+          title ??
+          App.text(
+            LocaleKeys.core.dialog.error.title,
+            defaultValue: 'Đã có lỗi xảy ra!',
+          ),
       message: message,
       primaryLabel: primaryLabel,
       secondaryLabel: secondaryLabel,
@@ -97,13 +127,20 @@ abstract class AppNotifyDialog extends StatelessWidget {
     );
   }
 
+  factory AppNotifyDialog.develop({Key? key, required StackTrace stackTrace}) {
+    return _AppDevelopDialog(key: key, stackTrace: stackTrace);
+  }
+
   final String title;
 
   final String message;
 
   @override
   Widget build(BuildContext context) {
-    return AppDialog(content: contentBuilder(context), button: buttonBuilder(context));
+    return AppDialog(
+      content: contentBuilder(context),
+      button: buttonBuilder(context),
+    );
   }
 
   Widget contentBuilder(BuildContext context);
@@ -156,7 +193,9 @@ class AppNotifyDialogContent extends StatelessWidget {
             message,
             maxLines: 3,
             textAlign: TextAlign.center,
-            style: AppFonts.size16Regular.copyWith(color: context.colorScheme.onSurfaceVariant),
+            style: AppFonts.size16Regular.copyWith(
+              color: context.colorScheme.onSurfaceVariant,
+            ),
           ),
         ],
       ),
@@ -190,7 +229,11 @@ class AppNotifyDialogButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: AppSpacing.s4, right: AppSpacing.s4, bottom: AppSpacing.s4),
+      padding: const EdgeInsets.only(
+        left: AppSpacing.s4,
+        right: AppSpacing.s4,
+        bottom: AppSpacing.s4,
+      ),
       child: Row(
         spacing: AppSpacing.s4,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -204,21 +247,17 @@ class AppNotifyDialogButton extends StatelessWidget {
   }
 
   Widget primaryButtonBuilder(BuildContext context) {
-    return AppButton(
+    return AppButton.filled(
       label: primaryLabel ?? '',
-      style: AppButtonStyle.filled,
       onPressed: onPrimaryPressed,
-      size: AppButtonSize.medium,
       backgroundColor: primaryColor,
     );
   }
 
   Widget secondaryButtonBuilder(BuildContext context) {
-    return AppButton(
+    return AppButton.outlined(
       label: secondaryLabel ?? '',
-      style: AppButtonStyle.outlined,
       onPressed: onSecondaryPressed,
-      size: AppButtonSize.medium,
       backgroundColor: secondaryColor,
     );
   }

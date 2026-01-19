@@ -1,6 +1,6 @@
 include: package:flutter_lints/flutter.yaml
 formatter:
-  page_width: 120
+  page_width: 80
   
 analyzer:
   exclude:
@@ -13,137 +13,136 @@ analyzer:
     collection_methods_unrelated_type: error
 
 linter:
-  # https://dart.dev/tools/linter-rules
+ 
   rules:
-    ## ACTIVATED RULES
-    prefer_single_quotes: true # https://dart.dev/tools/linter-rules/prefer_single_quotes
-    prefer_spread_collections: true # https://dart.dev/tools/linter-rules/prefer_spread_collections
-    prefer_typing_uninitialized_variables: true # https://dart.dev/tools/linter-rules/prefer_typing_uninitialized_variables
-    recursive_getters: true # https://dart.dev/tools/linter-rules/recursive_getters
-    slash_for_doc_comments: true # https://dart.dev/tools/linter-rules/slash_for_doc_comments
-    sort_child_properties_last: true # https://dart.dev/tools/linter-rules/sort_child_properties_last
-    unawaited_futures: true # https://dart.dev/tools/linter-rules/unawaited_futures
-    unnecessary_constructor_name: true # https://dart.dev/tools/linter-rules/unnecessary_constructor_name
-    unnecessary_null_aware_assignments: true # https://dart.dev/tools/linter-rules/unnecessary_null_aware_assignments
-    unnecessary_null_in_if_null_operators: true # https://dart.dev/tools/linter-rules/unnecessary_null_in_if_null_operators
-    annotate_overrides: true # https://dart.dev/tools/linter-rules/annotate_overrides
-    avoid_print: true # https://dart.dev/tools/linter-rules/avoid_print
-    avoid_function_literals_in_foreach_calls: true # https://dart.dev/tools/linter-rules/avoid_function_literals_in_foreach_calls
-    avoid_init_to_null: true # https://dart.dev/tools/linter-rules/avoid_init_to_null
-    avoid_null_checks_in_equality_operators: true # https://dart.dev/tools/linter-rules/avoid_null_checks_in_equality_operators
-    avoid_renaming_method_parameters: true # https://dart.dev/tools/linter-rules/avoid_renaming_method_parameters
-    avoid_return_types_on_setters: true # https://dart.dev/tools/linter-rules/avoid_return_types_on_setters
-    avoid_returning_null_for_void: true # https://dart.dev/tools/linter-rules/avoid_returning_null_for_void
-    avoid_empty_else: true # https://dart.dev/tools/linter-rules/avoid_empty_else
-    empty_statements: true # https://dart.dev/tools/linter-rules/empty_statements
-    exhaustive_cases: true # https://dart.dev/tools/linter-rules/exhaustive_cases
-    implementation_imports: true # https://dart.dev/tools/linter-rules/implementation_imports
-    library_names: true # https://dart.dev/tools/linter-rules/library_names
-    library_prefixes: true # https://dart.dev/tools/linter-rules/library_prefixes
-    no_leading_underscores_for_library_prefixes: true # https://dart.dev/tools/linter-rules/no_leading_underscores_for_library_prefixes
-    no_leading_underscores_for_local_identifiers: true # https://dart.dev/tools/linter-rules/no_leading_underscores_for_local_identifiers
-    null_closures: true # https://dart.dev/tools/linter-rules/null_closures
-    always_use_package_imports: true # https://dart.dev/tools/linter-rules/always_use_package_imports
-    avoid_types_as_parameter_names: true # https://dart.dev/tools/linter-rules/avoid_types_as_parameter_names
-    cancel_subscriptions: true # https://dart.dev/tools/linter-rules/cancel_subscriptions
-    close_sinks: true # https://dart.dev/tools/linter-rules/close_sinks
-    collection_methods_unrelated_type: true # https://dart.dev/tools/linter-rules/collection_methods_unrelated_type
-    no_duplicate_case_values: true # https://dart.dev/tools/linter-rules/no_duplicate_case_values
-    no_self_assignments: true # https://dart.dev/tools/linter-rules/no_self_assignments
-    no_wildcard_variable_uses: true # https://dart.dev/tools/linter-rules/no_wildcard_variable_uses
-    unnecessary_statements: true # https://dart.dev/tools/linter-rules/unnecessary_statements
-    unrelated_type_equality_checks: true # https://dart.dev/tools/linter-rules/unrelated_type_equality_checks
-    use_build_context_synchronously: true # https://dart.dev/tools/linter-rules/use_build_context_synchronously
-    use_key_in_widget_constructors: true # https://dart.dev/tools/linter-rules/use_key_in_widget_constructors
-    valid_regexps: true # https://dart.dev/tools/linter-rules/valid_regexps
-    always_declare_return_types: true # https://dart.dev/tools/linter-rules/always_declare_return_types
-    avoid_bool_literals_in_conditional_expressions: true # https://dart.dev/tools/linter-rules/avoid_bool_literals_in_conditional_expressions
-    avoid_multiple_declarations_per_line: true # https://dart.dev/tools/linter-rules/avoid_multiple_declarations_per_line
-    avoid_returning_this: true # https://dart.dev/tools/linter-rules/avoid_returning_this
-    avoid_shadowing_type_parameters: true # https://dart.dev/tools/linter-rules/avoid_shadowing_type_parameters
-    avoid_single_cascade_in_expression_statements: true # https://dart.dev/tools/linter-rules/avoid_single_cascade_in_expression_statements
-    avoid_unnecessary_containers: true # https://dart.dev/tools/linter-rules/avoid_unnecessary_containers
-    await_only_futures: true # https://dart.dev/tools/linter-rules/await_only_futures
-    camel_case_extensions: true # https://dart.dev/tools/linter-rules/camel_case_extensions
-    camel_case_types: true # https://dart.dev/tools/linter-rules/camel_case_types
-    cast_nullable_to_non_nullable: true # https://dart.dev/tools/linter-rules/cast_nullable_to_non_nullable
-    curly_braces_in_flow_control_structures: true # https://dart.dev/tools/linter-rules/curly_braces_in_flow_control_structures
-    dangling_library_doc_comments: true # https://dart.dev/tools/linter-rules/dangling_library_doc_comments
-    directives_ordering: true # https://dart.dev/tools/linter-rules/directives_ordering
-    empty_catches: true # https://dart.dev/tools/linter-rules/empty_catches
-    file_names: true # https://dart.dev/tools/linter-rules/file_names
-    implicit_call_tearoffs: true # https://dart.dev/tools/linter-rules/implicit_call_tearoffs
-    missing_whitespace_between_adjacent_strings: true # https://dart.dev/tools/linter-rules/missing_whitespace_between_adjacent_strings
-    no_literal_bool_comparisons: true # https://dart.dev/tools/linter-rules/no_literal_bool_comparisons
-    no_runtimeType_toString: true # https://dart.dev/tools/linter-rules/no_runtimeType_toString
-    non_constant_identifier_names: true # https://dart.dev/tools/linter-rules/non_constant_identifier_names
-    noop_primitive_operations: true # https://dart.dev/tools/linter-rules/noop_primitive_operations
-    null_check_on_nullable_type_parameter: true # https://dart.dev/tools/linter-rules/null_check_on_nullable_type_parameter
-    prefer_adjacent_string_concatenation: true # https://dart.dev/tools/linter-rules/prefer_adjacent_string_concatenation
-    prefer_asserts_in_initializer_lists: true # https://dart.dev/tools/linter-rules/prefer_asserts_in_initializer_lists
-    prefer_asserts_with_message: true # https://dart.dev/tools/linter-rules/prefer_asserts_with_message
-    prefer_collection_literals: true # https://dart.dev/tools/linter-rules/prefer_collection_literals
-    prefer_conditional_assignment: true # https://dart.dev/tools/linter-rules/prefer_conditional_assignment
-    prefer_const_constructors: true # https://dart.dev/tools/linter-rules/prefer_const_constructors
-    prefer_const_declarations: true # https://dart.dev/tools/linter-rules/prefer_const_declarations
-    prefer_contains: true # https://dart.dev/tools/linter-rules/prefer_contains
-    prefer_final_fields: true # https://dart.dev/tools/linter-rules/prefer_final_fields
-    prefer_final_in_for_each: true # https://dart.dev/tools/linter-rules/prefer_final_in_for_each
-    prefer_final_locals: true # https://dart.dev/tools/linter-rules/prefer_final_locals
-    prefer_for_elements_to_map_fromIterable: true # https://dart.dev/tools/linter-rules/prefer_for_elements_to_map_fromIterable
-    prefer_function_declarations_over_variables: true # https://dart.dev/tools/linter-rules/prefer_function_declarations_over_variables
-    prefer_generic_function_type_aliases: true # https://dart.dev/tools/linter-rules/prefer_generic_function_type_aliases
-    prefer_if_null_operators: true # https://dart.dev/tools/linter-rules/prefer_if_null_operators
-    prefer_initializing_formals: true # https://dart.dev/tools/linter-rules/prefer_initializing_formals
-    prefer_inlined_adds: true # https://dart.dev/tools/linter-rules/prefer_inlined_adds
-    prefer_interpolation_to_compose_strings: true # https://dart.dev/tools/linter-rules/prefer_interpolation_to_compose_strings
-    prefer_is_empty: true # https://dart.dev/tools/linter-rules/prefer_is_empty
-    prefer_is_not_empty: true # https://dart.dev/tools/linter-rules/prefer_is_not_empty
-    prefer_is_not_operator: true # https://dart.dev/tools/linter-rules/prefer_is_not_operator
-    prefer_iterable_whereType: true # https://dart.dev/tools/linter-rules/prefer_iterable_whereType
-    prefer_null_aware_method_calls: true # https://dart.dev/tools/linter-rules/prefer_null_aware_method_calls
-    prefer_null_aware_operators: true # https://dart.dev/tools/linter-rules/prefer_null_aware_operators
-    require_trailing_commas: true # https://dart.dev/tools/linter-rules/require_trailing_commas
-    sized_box_for_whitespace: true # https://dart.dev/tools/linter-rules/sized_box_for_whitespace
-    sized_box_shrink_expand: true # https://dart.dev/tools/linter-rules/sized_box_shrink_expand
-    sort_constructors_first: true # https://dart.dev/tools/linter-rules/sort_constructors_first
-    sort_unnamed_constructors_first: true # https://dart.dev/tools/linter-rules/sort_unnamed_constructors_first
-    tighten_type_of_initializing_formals: true # https://dart.dev/tools/linter-rules/tighten_type_of_initializing_formals
-    type_annotate_public_apis: true # https://dart.dev/tools/linter-rules/type_annotate_public_apis
-    type_init_formals: true # https://dart.dev/tools/linter-rules/type_init_formals
-    type_literal_in_constant_pattern: true # https://dart.dev/tools/linter-rules/type_literal_in_constant_pattern
-    unnecessary_await_in_return: true # https://dart.dev/tools/linter-rules/unnecessary_await_in_return
-    unnecessary_brace_in_string_interps: true # https://dart.dev/tools/linter-rules/unnecessary_brace_in_string_interps
-    unnecessary_breaks: true # https://dart.dev/tools/linter-rules/unnecessary_breaks
-    unnecessary_getters_setters: true # https://dart.dev/tools/linter-rules/unnecessary_getters_setters
-    unnecessary_lambdas: true # https://dart.dev/tools/linter-rules/unnecessary_lambdas
-    unnecessary_late: true # https://dart.dev/tools/linter-rules/unnecessary_late
-    unnecessary_nullable_for_final_variable_declarations: true # https://dart.dev/tools/linter-rules/unnecessary_nullable_for_final_variable_declarations
-    unnecessary_overrides: true # https://dart.dev/tools/linter-rules/unnecessary_overrides
-    unnecessary_raw_strings: true # https://dart.dev/tools/linter-rules/unnecessary_raw_strings
-    unnecessary_string_interpolations: true # https://dart.dev/tools/linter-rules/unnecessary_string_interpolations
-    unnecessary_this: true # https://dart.dev/tools/linter-rules/unnecessary_this
-    unnecessary_to_list_in_spreads: true # https://dart.dev/tools/linter-rules/unnecessary_to_list_in_spreads
-    use_colored_box: true # https://dart.dev/tools/linter-rules/use_colored_box
-    use_decorated_box: true # https://dart.dev/tools/linter-rules/use_decorated_box
-    use_enums: true # https://dart.dev/tools/linter-rules/use_enums
-    use_full_hex_values_for_flutter_colors: true # https://dart.dev/tools/linter-rules/use_full_hex_values_for_flutter_colors
-    use_function_type_syntax_for_parameters: true # https://dart.dev/tools/linter-rules/use_function_type_syntax_for_parameters
-    use_if_null_to_convert_nulls_to_bools: true # https://dart.dev/tools/linter-rules/use_if_null_to_convert_nulls_to_bools
-    use_is_even_rather_than_modulo: true # https://dart.dev/tools/linter-rules/use_is_even_rather_than_modulo
-    use_named_constants: true # https://dart.dev/tools/linter-rules/use_named_constants
-    use_raw_strings: true # https://dart.dev/tools/linter-rules/use_raw_strings
-    use_rethrow_when_possible: true # https://dart.dev/tools/linter-rules/use_rethrow_when_possible
-    use_string_buffers: true # https://dart.dev/tools/linter-rules/use_string_buffers
-    use_string_in_part_of_directives: true # https://dart.dev/tools/linter-rules/use_string_in_part_of_directives
-    void_checks: true # https://dart.dev/tools/linter-rules/void_checks
-    package_names: true # https://dart.dev/tools/linter-rules/package_names
-    secure_pubspec_urls: true # https://dart.dev/tools/linter-rules/secure_pubspec_urls
+    # Enable rules
+    prefer_single_quotes: true
+    prefer_spread_collections: true 
+    prefer_typing_uninitialized_variables: true
+    recursive_getters: true
+    slash_for_doc_comments: true
+    sort_child_properties_last: true
+    unawaited_futures: true
+    unnecessary_constructor_name: true
+    unnecessary_null_aware_assignments: true
+    unnecessary_null_in_if_null_operators: true
+    annotate_overrides: true
+    avoid_print: true
+    avoid_function_literals_in_foreach_calls: true
+    avoid_init_to_null: true
+    avoid_null_checks_in_equality_operators: true
+    avoid_renaming_method_parameters: true
+    avoid_return_types_on_setters: true
+    avoid_returning_null_for_void: true
+    avoid_empty_else: true
+    empty_statements: true
+    exhaustive_cases: true
+    implementation_imports: true
+    library_names: true
+    library_prefixes: true
+    no_leading_underscores_for_library_prefixes: true
+    no_leading_underscores_for_local_identifiers: true
+    null_closures: true
+    avoid_types_as_parameter_names: true
+    cancel_subscriptions: true
+    close_sinks: true
+    collection_methods_unrelated_type: true
+    no_duplicate_case_values: true
+    no_self_assignments: true
+    no_wildcard_variable_uses: true
+    unnecessary_statements: true
+    unrelated_type_equality_checks: true
+    use_build_context_synchronously: true
+    use_key_in_widget_constructors: true
+    valid_regexps: true
+    always_declare_return_types: true
+    avoid_bool_literals_in_conditional_expressions: true
+    avoid_multiple_declarations_per_line: true
+    avoid_returning_this: true
+    avoid_shadowing_type_parameters: true
+    avoid_single_cascade_in_expression_statements: true
+    avoid_unnecessary_containers: true
+    await_only_futures: true
+    camel_case_extensions: true
+    camel_case_types: true
+    cast_nullable_to_non_nullable: true
+    curly_braces_in_flow_control_structures: true
+    dangling_library_doc_comments: true
+    directives_ordering: true
+    empty_catches: true
+    file_names: true
+    implicit_call_tearoffs: true
+    missing_whitespace_between_adjacent_strings: true
+    no_literal_bool_comparisons: true
+    no_runtimeType_toString: true
+    non_constant_identifier_names: true
+    noop_primitive_operations: true
+    null_check_on_nullable_type_parameter: true
+    prefer_adjacent_string_concatenation: true
+    prefer_asserts_in_initializer_lists: true
+    prefer_asserts_with_message: true
+    prefer_collection_literals: true
+    prefer_conditional_assignment: true
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    prefer_contains: true
+    prefer_final_fields: true
+    prefer_final_in_for_each: true
+    prefer_final_locals: true
+    prefer_for_elements_to_map_fromIterable: true
+    prefer_function_declarations_over_variables: true
+    prefer_generic_function_type_aliases: true
+    prefer_if_null_operators: true
+    prefer_initializing_formals: true
+    prefer_inlined_adds: true
+    prefer_interpolation_to_compose_strings: true
+    prefer_is_empty: true
+    prefer_is_not_empty: true
+    prefer_is_not_operator: true
+    prefer_iterable_whereType: true
+    prefer_null_aware_method_calls: true
+    prefer_null_aware_operators: true
+    require_trailing_commas: true
+    sized_box_for_whitespace: true
+    sized_box_shrink_expand: true
+    sort_constructors_first: true
+    sort_unnamed_constructors_first: true
+    tighten_type_of_initializing_formals: true
+    type_annotate_public_apis: true
+    type_init_formals: true
+    type_literal_in_constant_pattern: true
+    unnecessary_await_in_return: true
+    unnecessary_brace_in_string_interps: true
+    unnecessary_breaks: true
+    unnecessary_getters_setters: true
+    unnecessary_lambdas: true
+    unnecessary_late: true
+    unnecessary_nullable_for_final_variable_declarations: true
+    unnecessary_overrides: true
+    unnecessary_raw_strings: true
+    unnecessary_string_interpolations: true
+    unnecessary_this: true
+    unnecessary_to_list_in_spreads: true
+    use_colored_box: true
+    use_decorated_box: true
+    use_enums: true
+    use_full_hex_values_for_flutter_colors: true
+    use_function_type_syntax_for_parameters: true
+    use_if_null_to_convert_nulls_to_bools: true
+    use_is_even_rather_than_modulo: true
+    use_named_constants: true
+    use_raw_strings: true
+    use_rethrow_when_possible: true
+    use_string_buffers: true
+    use_string_in_part_of_directives: true
+    void_checks: true
+    package_names: true
+    secure_pubspec_urls: true
 
-    # DISABLED RULES
-    constant_identifier_names: false # https://dart.dev/tools/linter-rules/constant_identifier_names
-    library_private_types_in_public_api: false # https://dart.dev/tools/linter-rules/library_private_types_in_public_api
-    depend_on_referenced_packages: false # https://dart.dev/tools/linter-rules/depend_on_referenced_packages
+    # Disable rules
+    constant_identifier_names: false
+    library_private_types_in_public_api: false
+    depend_on_referenced_packages: false
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

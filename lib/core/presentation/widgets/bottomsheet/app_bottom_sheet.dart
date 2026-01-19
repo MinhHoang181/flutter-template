@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:icon/icon.dart';
 import 'package:template/app/app.dart';
-import 'package:template/core/presentation/widgets/app_bottom_bar.dart';
-import 'package:template/core/presentation/widgets/app_text.dart';
-import 'package:template/core/theme/app_fonts.dart';
-import 'package:template/core/theme/app_radius.dart';
+
+import '../../../theme/app_fonts.dart';
+import '../../../theme/app_radius.dart';
+import '../../../theme/app_spacing.dart';
+import '../app_bottom_bar.dart';
+import '../app_button/app_button.dart';
+import '../app_icon.dart';
+import '../app_text.dart';
 
 class AppBottomSheet extends StatelessWidget {
-  const AppBottomSheet({super.key, this.height, this.header, required this.content, this.button});
+  const AppBottomSheet({
+    super.key,
+    this.height,
+    this.header,
+    required this.content,
+    this.bottom,
+  });
 
   final double? height;
 
@@ -14,13 +25,14 @@ class AppBottomSheet extends StatelessWidget {
 
   final Widget content;
 
-  final Widget? button;
+  final Widget? bottom;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.hardEdge,
       height: height,
+      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.vertical(top: AppRadius.xxxl),
@@ -29,14 +41,20 @@ class AppBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
-        children: [if (header != null) header!, content, if (button != null) button!],
+        children: [?header, content, ?bottom],
       ),
     );
   }
 }
 
 class AppBottomSheetHeader extends StatelessWidget {
-  const AppBottomSheetHeader({super.key, required this.title, this.leading, this.trailing, this.centerMiddle = true});
+  const AppBottomSheetHeader({
+    super.key,
+    required this.title,
+    this.leading,
+    this.trailing,
+    this.centerMiddle = true,
+  });
 
   final String title;
 
@@ -48,8 +66,12 @@ class AppBottomSheetHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 56,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.s4,
+        vertical: AppSpacing.s4,
+      ),
       child: NavigationToolbar(
         centerMiddle: centerMiddle,
         leading: leading,
@@ -65,7 +87,12 @@ class AppBottomSheetHeader extends StatelessWidget {
   }
 
   Widget closeButton(BuildContext context) {
-    return IconButton(icon: const Icon(Icons.close_rounded, size: 24), onPressed: App.closeBottomSheet);
+    return AppButton.icon(
+      icon: const AppIcon(icon: PhosphorIconsRegular.x, size: null),
+      style: AppIconButtonStyle.regular,
+      size: AppButtonSize.small,
+      onPressed: App.closeBottomSheet,
+    );
   }
 }
 
@@ -76,6 +103,10 @@ class AppBottomSheetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBottomBar(hasShadow: false, backgroundColor: Colors.transparent, child: child);
+    return AppBottomBar(
+      hasShadow: false,
+      backgroundColor: Colors.transparent,
+      child: child,
+    );
   }
 }

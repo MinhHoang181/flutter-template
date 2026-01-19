@@ -1,5 +1,6 @@
+import 'package:core_widget/core_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:template/core/theme/app_colors.dart';
+import 'package:template/core/theme/app_colors/app_colors.dart';
 import 'package:template/core/theme/app_fonts.dart';
 import 'package:template/core/theme/app_radius.dart';
 import 'package:template/core/theme/app_spacing.dart';
@@ -11,6 +12,7 @@ part 'src/app_tab_bar_theme.dart';
 part 'src/app_button_theme.dart';
 part 'src/app_divider_theme.dart';
 part 'src/app_input_decoration_theme.dart';
+part 'src/app_popup_menu_theme.dart';
 
 final class AppTheme {
   static final ThemeData light = _base(colorScheme: AppColorScheme.light);
@@ -26,11 +28,27 @@ final class AppTheme {
       fontFamily: AppFonts.fontFamily,
       visualDensity: VisualDensity.standard,
       textTheme: textTheme,
-      appBarTheme: AppAppBarTheme(colorScheme: colorScheme, textTheme: textTheme),
-      tabBarTheme: AppTabBarTheme(colorScheme: colorScheme, textTheme: textTheme),
+      appBarTheme: AppAppBarTheme(
+        colorScheme: colorScheme,
+        textTheme: textTheme,
+      ),
+      tabBarTheme: AppTabBarTheme(
+        colorScheme: colorScheme,
+        textTheme: textTheme,
+      ),
       buttonTheme: AppButtonTheme(colorScheme: colorScheme),
       dividerTheme: AppDividerTheme(colorScheme: colorScheme),
-      inputDecorationTheme: AppInputDecorationTheme(colorScheme: colorScheme, textTheme: textTheme),
+      inputDecorationTheme: AppInputDecorationTheme(
+        colorScheme: colorScheme,
+        textTheme: textTheme,
+      ),
+      popupMenuTheme: AppPopupMenuTheme(colorScheme: colorScheme),
+      extensions: [
+        SkeletonTheme(
+          baseColor: colorScheme.surfaceContainerHighest,
+          highlightColor: colorScheme.surfaceBright,
+        ),
+      ],
     );
   }
 }

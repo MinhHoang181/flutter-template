@@ -3,5 +3,5 @@ class EnvConstants {
 
   static const String ENV = 'ENV';
 
-  static const String BASE_URL = 'BASE_URL';
+  static const String API_URL = 'API_URL';
 }

@@ -1,12 +1,14 @@
+import 'package:core_widget/core_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:template/app/app.dart';
-import 'package:template/app/dependencies/injectable.dart';
-import 'package:template/app/services/app_localization.dart';
-import 'package:template/app/services/app_theme_manager.dart';
-import 'package:template/core/constants/env_constants.dart';
-import 'package:template/core/presentation/widgets/flavor_banner.dart';
+
+import 'app/app.dart';
+import 'app/dependencies/configure_dependencies.dart';
+import 'app/mediator/mediator.dart';
+import 'app/services/app_localization.dart';
+import 'app/services/app_theme_manager.dart';
+import 'core/constants/env_constants.dart';
 
 void main() async {
   await _preRunApp();
@@ -29,9 +31,13 @@ Widget _app() {
 Future<void> _preRunApp() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   await configureDependencies();
+  configureMediator();
 
   await AppThemeManager.ensureInitialized();
   await AppLocalization.ensureInitialized();
@@ -82,7 +88,9 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return FlavorBanner(
-      isShow: !(getIt.get<DotEnv>().env[EnvConstants.ENV]?.toUpperCase().trim() == 'PROD'),
+      isShow:
+          !(getIt.get<DotEnv>().env[EnvConstants.ENV]?.toUpperCase().trim() ==
+              'PROD'),
       env: getIt.get<DotEnv>().env[EnvConstants.ENV],
       child: MaterialApp.router(
         // app theme manager
@@ -109,13 +117,18 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
     child ??= const SizedBox.shrink();
 
     // unfocus when tap
-    child = GestureDetector(onTap: FocusManager.instance.primaryFocus?.unfocus, child: child);
+    child = GestureDetector(
+      onTap: FocusManager.instance.primaryFocus?.unfocus,
+      child: child,
+    );
 
     // no scaling text
     child = MediaQuery(
-      data: MediaQuery.of(
-        context,
-      ).copyWith(textScaler: MediaQuery.textScalerOf(context).clamp(minScaleFactor: 1.0, maxScaleFactor: 1.2)),
+      data: MediaQuery.of(context).copyWith(
+        textScaler: MediaQuery.textScalerOf(
+          context,
+        ).clamp(minScaleFactor: 1.0, maxScaleFactor: 1.2),
+      ),
       child: child,
     );
 

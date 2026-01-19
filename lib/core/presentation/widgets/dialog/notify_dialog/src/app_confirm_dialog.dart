@@ -23,7 +23,7 @@ class _ConfirmDialog extends AppNotifyDialog {
   Widget contentBuilder(BuildContext context) {
     return AppNotifyDialogContent(
       icon: Icons.priority_high_rounded,
-      color: AppColors.info,
+      color: AppColors.blue600,
       title: title,
       message: message,
     );
@@ -33,11 +33,22 @@ class _ConfirmDialog extends AppNotifyDialog {
   Widget buttonBuilder(BuildContext context) {
     return AppNotifyDialogButton(
       primaryLabel:
-          primaryLabel ?? context.text(LocaleKeys.core.dialog.confirm.button.confirm, defaultValue: 'Xác nhận'),
-      onPrimaryPressed: onPrimaryPressed ?? () => Navigator.of(context).pop(true),
+          primaryLabel ??
+          context.text(
+            LocaleKeys.core.dialog.confirm.button.confirm,
+            defaultValue: 'Xác nhận',
+          ),
+      onPrimaryPressed:
+          onPrimaryPressed ?? () => Navigator.of(context).pop(true),
       primaryColor: context.colorScheme.primary,
-      secondaryLabel: secondaryLabel ?? context.text(LocaleKeys.core.dialog.confirm.button.cancel, defaultValue: 'Hủy'),
-      onSecondaryPressed: onSecondaryPressed ?? () => Navigator.of(context).pop(false),
+      secondaryLabel:
+          secondaryLabel ??
+          context.text(
+            LocaleKeys.core.dialog.confirm.button.cancel,
+            defaultValue: 'Hủy',
+          ),
+      onSecondaryPressed:
+          onSecondaryPressed ?? () => Navigator.of(context).pop(false),
       secondaryColor: null,
     );
   }

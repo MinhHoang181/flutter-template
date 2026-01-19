@@ -11,7 +11,7 @@ class AppRadius {
 
   static const Radius md = Radius.circular(8);
 
-  static const Radius lg = Radius.circular(8);
+  static const Radius lg = Radius.circular(10);
 
   static const Radius xl = Radius.circular(12);
 

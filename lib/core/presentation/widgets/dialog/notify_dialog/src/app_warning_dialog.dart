@@ -23,7 +23,7 @@ class _AppWarningDialog extends AppNotifyDialog {
   Widget contentBuilder(BuildContext context) {
     return AppNotifyDialogContent(
       icon: Icons.question_mark_rounded,
-      color: AppColors.warning,
+      color: AppColors.orange600,
       title: title,
       message: message,
     );
@@ -33,10 +33,19 @@ class _AppWarningDialog extends AppNotifyDialog {
   Widget buttonBuilder(BuildContext context) {
     return AppNotifyDialogButton(
       primaryLabel:
-          primaryLabel ?? context.text(LocaleKeys.core.dialog.warning.button.confirm, defaultValue: 'Xác nhận'),
+          primaryLabel ??
+          context.text(
+            LocaleKeys.core.dialog.warning.button.confirm,
+            defaultValue: 'Xác nhận',
+          ),
       onPrimaryPressed: onPrimaryPressed ?? () => App.pop(true),
-      primaryColor: AppColors.warning,
-      secondaryLabel: secondaryLabel ?? context.text(LocaleKeys.core.dialog.warning.button.cancel, defaultValue: 'Hủy'),
+      primaryColor: AppColors.orange600,
+      secondaryLabel:
+          secondaryLabel ??
+          context.text(
+            LocaleKeys.core.dialog.warning.button.cancel,
+            defaultValue: 'Hủy',
+          ),
       onSecondaryPressed: onSecondaryPressed ?? () => App.pop(false),
       secondaryColor: null,
     );

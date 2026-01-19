@@ -20,13 +20,13 @@ class AppColorScheme {
     onSecondaryContainer: null,
 
     // Tertiary colors
-    tertiary: AppColors.tertiary,
+    tertiary: null,
     onTertiary: null,
     tertiaryContainer: null,
     onTertiaryContainer: null,
 
     // Error colors
-    error: AppColors.error,
+    error: AppColors.red600,
     onError: null,
     errorContainer: null,
     onErrorContainer: null,
@@ -95,13 +95,13 @@ class AppColorScheme {
     onSecondaryContainer: null,
 
     // Tertiary colors
-    tertiary: AppColors.tertiary,
+    tertiary: null,
     onTertiary: null,
     tertiaryContainer: null,
     onTertiaryContainer: null,
 
     // Error colors
-    error: AppColors.error,
+    error: AppColors.red600,
     onError: null,
     errorContainer: null,
     onErrorContainer: null,

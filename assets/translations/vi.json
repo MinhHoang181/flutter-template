@@ -1,5 +1,7 @@
 {
     "core": {
+        "retry": "Thử lại",
+        "empty": "Không có dữ liệu",
         "error_screen": {
             "app_bar": "Lỗi điều hướng",
             "message": "Đã có lỗi xảy ra, vui lòng thử lại",
@@ -31,9 +33,97 @@
                 "button": {
                     "close": "Đóng"
                 }
+            },
+            "develop": {
+                "title": "Đang phát triển!",
+                "message": "Tính năng này đang được phát triển!",
+                "button": {
+                    "close": "Đóng"
+                }
+            },
+            "date_picker": {
+                "buttons": {
+                    "reset": "Đặt lại",
+                    "done": "Hoàn tất"
+                }
             }
         },
-        "version": "Phiên bản"
+        "bottomsheet": {
+            "date_time_picker": {
+                "title": {
+                    "date": "Chọn ngày",
+                    "time": "Chọn thời gian",
+                    "date_time": "Chọn ngày và thời gian"
+                }
+            }
+        },
+        "validate": {
+            "is_required": "Vui lòng nhập dữ liệu",
+            "date_of_birth": {
+                "future_date": "Ngày sinh không thể ở tương lai",
+                "too_old": "Ngày sinh không hợp lệ (quá xa quá khứ)"
+            },
+            "email": {
+                "invalid": "Email không hợp lệ"
+            },
+            "phone": {
+                "invalid": "Số điện thoại không hợp lệ"
+            },
+            "national_id": {
+                "invalid": "Mã không hợp lệ"
+            },
+            "num_compare": {
+                "less_than_min": "Giá trị phải lớn hơn hoặc bằng {min}",
+                "greater_than_max": "Giá trị phải nhỏ hơn hoặc bằng {max}",
+                "not_equal": "Giá trị phải bằng {equal}"
+            },
+            "iterable_length": {
+                "less_than_min": "Giá trị phải lớn hơn hoặc bằng {min}",
+                "greater_than_max": "Giá trị phải nhỏ hơn hoặc bằng {max}"
+            },
+            "otp": {
+                "invalid": "Mã OTP phải có {length} chữ số"
+            },
+            "password": {
+                "less_than_min": "Mật khẩu phải có ít nhất {min} ký tự",
+                "no_number": "Mật khẩu phải có ít nhất 1 số"
+            },
+            "confirm_password": {
+                "not_match": "Mật khẩu không khớp"
+            },
+            "date": {
+                "less_than_min": "Ngày phải sau hoặc bằng {min}",
+                "greater_than_max": "Ngày phải trước hoặc bằng {max}"
+            },
+            "string_length": {
+                "less_than_min": "Chuỗi phải có ít nhất {min} ký tự",
+                "greater_than_max": "Chuỗi phải có ít nhất {max} ký tự"
+            }
+        },
+        "version": "Phiên bản",
+        "search_bar": {
+            "hint": "Tìm kiếm"
+        }
+    },
+    "app": {
+        "network": {
+            "auth_interceptor": {
+                "end_session": {
+                    "title": "Lỗi truy cập",
+                    "message": "Phiên đăng nhập hết hạn, vui lòng đăng nhập lại"
+                }
+            }
+        }
+    },
+    "business": {
+        "api_exception": {
+            "connection_timeout": "Kết nối tới hệ thống mất nhiều thời gian, vui lòng thử lại sau",
+            "send_timeout": "Gửi yêu cầu tới hệ thống mất nhiều thời gian, vui lòng thử lại sau",
+            "receive_timeout": "Hệ thống mất nhiều thời gian phản hồi, vui lòng thử lại sau",
+            "bad_certificate": "Lỗi chứng chỉ kết nối không hợp lệ, vui lòng thử lại sau",
+            "bad_response": "Hệ thống đang gặp sự cố, vui lòng thử lại sau",
+            "connection_error": "Lỗi kết nối mạng, vui lòng thử lại sau"
+        }
     },
     "splash": {
         "error_dialog": {

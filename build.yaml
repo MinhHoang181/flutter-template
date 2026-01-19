@@ -1,0 +1,62 @@
+targets:
+  $default:
+    builders:
+      freezed:
+        options:
+          # có sinh copyWith hay không (default: true)
+          copy_with: true
+          # có override toString hay không (default: true)
+          to_string: true
+          # có override == và hashCode hay không (default: true)
+          equal: true
+          # list/map/set có bị wrap thành UnmodifiableView không (default: true)
+          make_collections_unmodifiable: true
+          # tự thêm final vào field nếu không khai báo (default: true)
+          add_implicit_final: true
+          # cấu hình JSON cho freezed (áp dụng cho các class dùng @freezed)
+          # có sinh fromJson factory không (default: false)
+          from_json: false
+          # có sinh toJson không (default: false)
+          to_json: false
+          # hỗ trợ generic argument factories (default: false)
+          generic_argument_factories: false
+          # key dùng để phân biệt union trong JSON (default: "runtimeType")
+          union_key: "type"
+          # case format cho union value (default: none)
+          # các giá trị: none, snake, kebab, pascal, camel
+          union_value_case: snake
+          # fallback union nếu gặp giá trị không khớp (default: null)
+          fallback_union: null
+          # bắt buộc dùng @JsonKey(name: ...) khi generate (default: false)
+          always_use_json_key_name: true
+          
+      json_serializable:
+        options:
+          # cho phép Map có key không phải String (default: false)
+          any_map: false
+          # bật chế độ validate đầu vào khi fromJson (default: false)
+          checked: true
+          # tên constructor được dùng khi fromJson (mặc định là factory)
+          constructor: ""
+          # sinh hàm fromJson (default: true)
+          create_factory: true
+          # sinh field map tĩnh hỗ trợ reflect (default: false)
+          create_field_map: false
+          # sinh const JsonKey cho từng field (default: false)
+          create_json_keys: false
+          # sinh toJson riêng cho từng field (default: false)
+          create_per_field_to_json: false
+          # sinh hàm toJson (default: true)
+          create_to_json: true
+          # lỗi khi JSON có key lạ (default: false)
+          disallow_unrecognized_keys: false
+          # gọi toJson() tường minh cho nested object (default: false)
+          explicit_to_json: true
+          # đổi case key trong JSON: none/snake/kebab/pascal/camel
+          field_rename: none
+          # yêu cầu truyền hàm fromJson/toJson cho generic (default: false)
+          generic_argument_factories: false
+          # chỉ generate cho class có annotation (default: false)
+          ignore_unannotated: false
+          # include các field null khi toJson (default: true)
+          include_if_null: false

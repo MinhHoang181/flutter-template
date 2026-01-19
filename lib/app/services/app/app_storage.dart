@@ -1,11 +1,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:template/app/app.dart';
 
-abstract interface class AppStorage implements FirstTimeStartAppStorage {}
-
-abstract interface class FirstTimeStartAppStorage {
-  static const String _firstTimeStartAppKey = 'first_time_start_app';
-
+abstract interface class AppStorage {
   Future<bool> startAppFirstTime();
 
   bool isFirsTimeStartApp();
@@ -15,21 +12,42 @@ abstract interface class FirstTimeStartAppStorage {
 final class AppStorageImpl implements AppStorage {
   AppStorageImpl({required SharedPreferences prefs}) : _prefs = prefs;
 
+  static const String _firstTimeStartAppKey = 'first_time_start_app';
+
   final SharedPreferences _prefs;
 
   @override
   bool isFirsTimeStartApp() {
-    final bool isFirstTimeStartApp = _prefs.getBool(FirstTimeStartAppStorage._firstTimeStartAppKey) ?? true;
+    try {
+      final bool isFirstTimeStartApp =
+          _prefs.getBool(_firstTimeStartAppKey) ?? true;
 
-    if (isFirstTimeStartApp) {
-      startAppFirstTime();
+      if (isFirstTimeStartApp) {
+        startAppFirstTime();
+      }
+
+      return isFirstTimeStartApp;
+    } catch (error, stackTrace) {
+      App.logError(
+        title: '$AppStorageImpl.isFirsTimeStartApp',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      return true;
     }
-
-    return isFirstTimeStartApp;
   }
 
   @override
-  Future<bool> startAppFirstTime() {
-    return _prefs.setBool(FirstTimeStartAppStorage._firstTimeStartAppKey, false);
+  Future<bool> startAppFirstTime() async {
+    try {
+      return _prefs.setBool(_firstTimeStartAppKey, false);
+    } catch (error, stackTrace) {
+      App.logError(
+        title: '$AppStorageImpl.startAppFirstTime',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      return false;
+    }
   }
 }

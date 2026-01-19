@@ -21,7 +21,12 @@ class _AppErrorDialog extends AppNotifyDialog {
 
   @override
   Widget contentBuilder(BuildContext context) {
-    return AppNotifyDialogContent(icon: Icons.close_rounded, color: AppColors.error, title: title, message: message);
+    return AppNotifyDialogContent(
+      icon: Icons.close_rounded,
+      color: AppColors.red600,
+      title: title,
+      message: message,
+    );
   }
 
   @override
@@ -29,8 +34,13 @@ class _AppErrorDialog extends AppNotifyDialog {
     return AppNotifyDialogButton(
       primaryLabel: primaryLabel,
       onPrimaryPressed: onPrimaryPressed,
-      primaryColor: AppColors.error,
-      secondaryLabel: secondaryLabel ?? context.text(LocaleKeys.core.dialog.error.button.close, defaultValue: 'Đóng'),
+      primaryColor: AppColors.red600,
+      secondaryLabel:
+          secondaryLabel ??
+          context.text(
+            LocaleKeys.core.dialog.error.button.close,
+            defaultValue: 'Đóng',
+          ),
       onSecondaryPressed: onSecondaryPressed ?? () => App.closeDialog(),
       secondaryColor: null,
     );

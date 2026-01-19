@@ -7,7 +7,10 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as material show showDialog, showModalBottomSheet;
+import 'package:flutter/material.dart'
+    as material
+    show showDialog, showModalBottomSheet;
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:talker/talker.dart';
 
@@ -28,6 +31,8 @@ const App = _AppExt();
 final Completer<void> startAppCompleter = Completer<void>();
 final Completer<void> initializeAppCompleter = Completer<void>();
 final Completer<void> rootPageCompleter = Completer<void>();
+
+final GetIt getIt = GetIt.instance;
 
 extension AppExt on _AppExt {
   Future<void> waitStartAppFinish({bool waitRootPage = false}) async {

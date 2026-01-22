@@ -4,10 +4,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:template/app/app.dart';
-import 'package:template/app/mediator/mediator.dart';
 import 'package:template/core/utils/async_deduplicator.dart';
 
+import '../../app.dart';
+import '../../mediator/mediator.dart';
 import 'datasources/auth_client.dart';
 import 'datasources/auth_storage.dart';
 import 'models/auth_exception.dart';

@@ -15,7 +15,8 @@ class HomeRoute extends AppRouteData with $HomeRoute, AppRouteDataMixin {
 class SplashRoute extends AppRouteData with $SplashRoute, AppRouteDataMixin {
   const SplashRoute();
 
-  static final GlobalKey<NavigatorState> $parentNavigatorKey = AppRouter.instance.rootNavigatorKey;
+  static final GlobalKey<NavigatorState> $parentNavigatorKey =
+      AppRouter.instance.rootNavigatorKey;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

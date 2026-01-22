@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:template/app/route/data/app_transition_page.dart';
-import 'package:template/app/route/redirect/app_redirect.dart';
+
+import '../redirect/app_redirect.dart';
+import 'app_transition_page.dart';
 
 abstract class AppRouteData implements GoRouteData {
   const AppRouteData();
@@ -18,10 +19,19 @@ abstract class AppRouteData implements GoRouteData {
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     if (transitionType == AppTransitionType.rightToLeft) {
-      return CupertinoPage(key: state.pageKey, name: state.name, child: build(context, state));
+      return CupertinoPage(
+        key: state.pageKey,
+        name: state.name,
+        child: build(context, state),
+      );
     }
 
-    return AppTransitionPage(key: state.pageKey, name: state.name, type: transitionType, child: build(context, state));
+    return AppTransitionPage(
+      key: state.pageKey,
+      name: state.name,
+      type: transitionType,
+      child: build(context, state),
+    );
   }
 
   @override

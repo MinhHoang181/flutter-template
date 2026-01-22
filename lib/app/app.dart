@@ -14,7 +14,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:talker/talker.dart';
 
-import 'package:template/app/route/route.dart';
+import 'route/route.dart';
 
 part 'extensions/debug.dart';
 part 'extensions/navigation.dart';

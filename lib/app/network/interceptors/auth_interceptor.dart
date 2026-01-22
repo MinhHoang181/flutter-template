@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:template/app/app.dart';
-import 'package:template/app/mediator/mediator.dart';
-import 'package:template/app/services/auth/auth_service.dart';
-import 'package:template/app/services/auth/models/jwt_token.dart';
 import 'package:template/core/constants/network_constants.dart';
 import 'package:template/core/presentation/widgets/dialog/notify_dialog/app_notify_dialog.dart';
 import 'package:template/gen/locale_keys.gen.dart';
+
+import '../../app.dart';
+import '../../mediator/mediator.dart';
+import '../../services/auth/auth_service.dart';
+import '../../services/auth/models/jwt_token.dart';
 
 class AuthInterceptor extends QueuedInterceptor {
   AuthInterceptor({required Dio retryDio, required AuthService authService})

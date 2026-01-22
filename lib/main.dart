@@ -1,3 +1,4 @@
+import 'package:core_extension/core_extension.dart';
 import 'package:core_widget/core_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -87,11 +88,16 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    final String env = getIt
+        .get<DotEnv>()
+        .env
+        .getString(EnvConstants.ENV)
+        .toUpperCase()
+        .trim();
+
     return FlavorBanner(
-      isShow:
-          !(getIt.get<DotEnv>().env[EnvConstants.ENV]?.toUpperCase().trim() ==
-              'PROD'),
-      env: getIt.get<DotEnv>().env[EnvConstants.ENV],
+      isShow: env != 'PROD',
+      env: env,
       child: MaterialApp.router(
         // app theme manager
         theme: context.lightTheme,
@@ -124,11 +130,7 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
 
     // no scaling text
     child = MediaQuery(
-      data: MediaQuery.of(context).copyWith(
-        textScaler: MediaQuery.textScalerOf(
-          context,
-        ).clamp(minScaleFactor: 1.0, maxScaleFactor: 1.2),
-      ),
+      data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
       child: child,
     );
 

@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:template/app/app.dart';
+
 import 'package:template/core/classes/app_exception.dart';
 import 'package:template/gen/locale_keys.gen.dart';
+
+import '../../../app/app.dart';
 
 abstract class ApiException extends AppException {
   const ApiException._({

@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:template/app/route/data/app_transition_page.dart';
-import 'package:template/app/route/redirect/app_redirect.dart';
+
+import '../redirect/app_redirect.dart';
+import 'app_transition_page.dart';
 
 abstract class AppStatefulShellRouteData extends StatefulShellRouteData {
   const AppStatefulShellRouteData();
@@ -13,10 +14,18 @@ abstract class AppStatefulShellRouteData extends StatefulShellRouteData {
   AppTransitionType get transitionType => AppTransitionType.noTransition;
 
   @override
-  Widget builder(BuildContext context, GoRouterState state, StatefulNavigationShell navigationShell);
+  Widget builder(
+    BuildContext context,
+    GoRouterState state,
+    StatefulNavigationShell navigationShell,
+  );
 
   @override
-  Page<void> pageBuilder(BuildContext context, GoRouterState state, StatefulNavigationShell navigationShell) {
+  Page<void> pageBuilder(
+    BuildContext context,
+    GoRouterState state,
+    StatefulNavigationShell navigationShell,
+  ) {
     return AppTransitionPage(
       key: state.pageKey,
       name: state.name,

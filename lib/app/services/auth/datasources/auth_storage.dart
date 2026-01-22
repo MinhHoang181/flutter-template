@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
-import 'package:template/app/app.dart';
+
+import '../../../app.dart';
 
 abstract interface class AuthStorage {
   Future<void> clearAll();

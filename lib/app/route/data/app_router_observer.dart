@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:talker/talker.dart';
 
-import 'package:template/app/app.dart';
+import '../../app.dart';
 
 class AppRouterObserver extends NavigatorObserver {
   AppRouterObserver();
@@ -28,7 +28,8 @@ class AppRouterObserver extends NavigatorObserver {
 }
 
 class _TalkerRouteLog extends TalkerLog {
-  _TalkerRouteLog({required Route route, bool isPush = true}) : super(_createMessage(route, isPush));
+  _TalkerRouteLog({required Route route, bool isPush = true})
+    : super(_createMessage(route, isPush));
 
   @override
   AnsiPen get pen => AnsiPen()..xterm(135);

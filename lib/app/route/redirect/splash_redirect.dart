@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:template/app/app.dart';
-import 'package:template/app/route/redirect/app_redirect.dart';
-import 'package:template/app/route/route.dart';
+
+import '../../app.dart';
+import '../route.dart';
+import 'app_redirect.dart';
 
 class SplashRedirect extends AppRedirect {
   const SplashRedirect();

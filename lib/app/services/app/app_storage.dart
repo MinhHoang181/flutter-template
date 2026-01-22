@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:template/app/app.dart';
+
+import '../../app.dart';
 
 abstract interface class AppStorage {
   Future<bool> startAppFirstTime();

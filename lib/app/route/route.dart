@@ -2,16 +2,17 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:template/app/route/data/app_route_data.dart';
-import 'package:template/app/route/data/app_router_observer.dart';
-import 'package:template/app/route/data/app_stateful_shell_route_data.dart';
-import 'package:template/app/route/data/app_transition_page.dart';
-import 'package:template/app/route/redirect/app_redirect.dart';
-import 'package:template/app/route/redirect/splash_redirect.dart';
-import 'package:template/features/home/presentation/screens/home_screen.dart';
-import 'package:template/features/shared_presentation/screens/navigation_error_screen.dart';
-import 'package:template/features/shared_presentation/screens/root_screen.dart';
-import 'package:template/features/shared_presentation/screens/splash_screen.dart';
+
+import '../../features/home/presentation/screens/home_screen.dart';
+import '../../features/shared_presentation/screens/navigation_error_screen.dart';
+import '../../features/shared_presentation/screens/root_screen.dart';
+import '../../features/shared_presentation/screens/splash_screen.dart';
+import 'data/app_route_data.dart';
+import 'data/app_router_observer.dart';
+import 'data/app_stateful_shell_route_data.dart';
+import 'data/app_transition_page.dart';
+import 'redirect/app_redirect.dart';
+import 'redirect/splash_redirect.dart';
 
 part 'route.g.dart';
 part 'src/_root_route.dart';

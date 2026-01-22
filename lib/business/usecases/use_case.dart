@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:template/app/app.dart';
 import 'package:template/core/classes/app_exception.dart';
 import 'package:template/core/utils/either.dart';
 
+import '../../app/app.dart';
 import '../models/exceptions/api_exception.dart';
 
 abstract class UseCase<Input, Output> extends _UseCase {

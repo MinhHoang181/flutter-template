@@ -8,11 +8,15 @@ part of '../route.dart';
 class RootRoute extends AppStatefulShellRouteData {
   const RootRoute() : this._internal();
 
-  factory RootRoute.custom({AppTransitionType transitionType = AppTransitionType.noTransition}) {
+  factory RootRoute.custom({
+    AppTransitionType transitionType = AppTransitionType.noTransition,
+  }) {
     return RootRoute._internal(transitionType: transitionType);
   }
 
-  const RootRoute._internal({this.transitionType = AppTransitionType.noTransition});
+  const RootRoute._internal({
+    this.transitionType = AppTransitionType.noTransition,
+  });
 
   @override
   final AppTransitionType transitionType;
@@ -23,7 +27,11 @@ class RootRoute extends AppStatefulShellRouteData {
   static String get initialLocation => const HomeRoute().location;
 
   @override
-  Widget builder(BuildContext context, GoRouterState state, StatefulNavigationShell navigationShell) {
+  Widget builder(
+    BuildContext context,
+    GoRouterState state,
+    StatefulNavigationShell navigationShell,
+  ) {
     return RootScreen(navigationShell: navigationShell);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
-import 'package:template/app/app.dart';
 
+import '../../app.dart';
 import 'app_storage.dart';
 
 @Singleton()

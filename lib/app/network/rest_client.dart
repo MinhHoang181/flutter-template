@@ -1,15 +1,17 @@
 import 'dart:io';
 
+import 'package:core_extension/core_extension.dart';
 import 'package:dio/dio.dart' hide LogInterceptor;
 import 'package:dio/io.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
-import 'package:template/app/app.dart';
-import 'package:template/app/network/interceptors/error_interceptor.dart';
-import 'package:template/app/network/interceptors/header_interceptor.dart';
-import 'package:template/app/network/interceptors/log_interceptor.dart';
-import 'package:template/app/services/device_info.dart';
-import 'package:template/core/constants/env_constants.dart';
+
+import '../../core/constants/env_constants.dart';
+import '../app.dart';
+import '../services/device_info.dart';
+import 'interceptors/error_interceptor.dart';
+import 'interceptors/header_interceptor.dart';
+import 'interceptors/log_interceptor.dart';
 
 @Singleton()
 class RestClient {
@@ -53,5 +55,5 @@ class RestClient {
 
   final Dio dio;
 
-  String get baseUrl => _dotEnv.env[EnvConstants.API_URL] ?? '';
+  String get baseUrl => _dotEnv.env.getString(EnvConstants.API_URL);
 }

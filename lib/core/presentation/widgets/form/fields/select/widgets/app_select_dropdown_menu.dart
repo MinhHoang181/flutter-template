@@ -264,7 +264,6 @@ RelativeRect _getPosition(
   final endX = dropdownOffset.dx + dropdownSize.width - menuSize.width;
 
   // Calculate vertical positions
-  // final topY = dropdownOffset.dy - menuSize.height;
   final bottomY = dropdownOffset.dy + dropdownSize.height;
 
   // Get position based on alignment
@@ -272,9 +271,6 @@ RelativeRect _getPosition(
     DropdownMenuAlign.bottomStart => (startX, bottomY),
     DropdownMenuAlign.bottomCenter => (centerX, bottomY),
     DropdownMenuAlign.bottomEnd => (endX, bottomY),
-    // DropdownMenuAlign.topStart => (startX, topY),
-    // DropdownMenuAlign.topCenter => (centerX, topY),
-    // DropdownMenuAlign.topEnd => (endX, topY),
     null => (endX, bottomY), // default: bottomEnd
   };
 
@@ -285,10 +281,6 @@ enum DropdownMenuAlign {
   bottomStart,
   bottomCenter,
   bottomEnd,
-  // Hiện tại đang lỗi do sử dụng ListView trong content nên dẫn tới tính toán chưa chính xác
-  // topStart,
-  // topCenter,
-  // topEnd,
 }
 
 class DropdownMenuProps {

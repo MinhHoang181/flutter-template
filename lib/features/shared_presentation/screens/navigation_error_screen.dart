@@ -27,37 +27,39 @@ class NavigationErrorScreen extends StatelessWidget {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            spacing: AppSpacing.s4,
-            children: [
-              AppText(
-                error ??
-                    context.text(
-                      LocaleKeys.core.error_screen.message,
-                      defaultValue: 'Đã có lỗi xảy ra, vui lòng thử lại',
-                    ),
-                textAlign: TextAlign.center,
-                maxLines: null,
-                style: AppFonts.size16Regular,
-              ),
-              if (onBackHome != null) ...[
-                AppButton.filled(
-                  label: context.text(
-                    LocaleKeys.core.error_screen.back_home,
-                    defaultValue: 'Quay về trang chủ',
-                  ),
-                  onPressed: onBackHome != null
-                      ? () => onBackHome!(context)
-                      : null,
-                  size: AppButtonSize.large,
-                ),
-              ],
-            ],
-          ),
+          child: _buildBody(context),
         ),
       ),
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      spacing: AppSpacing.s4,
+      children: [
+        AppText(
+          error ??
+              context.text(
+                LocaleKeys.core.error_screen.message,
+                defaultValue: 'Đã có lỗi xảy ra, vui lòng thử lại',
+              ),
+          textAlign: TextAlign.center,
+          maxLines: null,
+          style: AppFonts.size16Regular,
+        ),
+        if (onBackHome != null) ...[
+          AppButton.filled(
+            label: context.text(
+              LocaleKeys.core.error_screen.back_home,
+              defaultValue: 'Quay về trang chủ',
+            ),
+            onPressed: () => onBackHome!(context),
+            size: AppButtonSize.large,
+          ),
+        ],
+      ],
     );
   }
 }

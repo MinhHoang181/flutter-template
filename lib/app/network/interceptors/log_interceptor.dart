@@ -218,7 +218,19 @@ Object? _convertDataLog(Object? data) {
   }
 
   if (data is Map<String, dynamic>) {
-    return data.map((key, value) => MapEntry(key, _convertDataLog(value)));
+    return data.map((key, value) {
+      const sensitiveKeys = {
+        'password',
+        'token',
+        'access_token',
+        'refresh_token',
+        'otp',
+      };
+      if (sensitiveKeys.contains(key.toLowerCase())) {
+        return MapEntry(key, '*** REDACTED ***');
+      }
+      return MapEntry(key, _convertDataLog(value));
+    });
   }
 
   if (data is List) {

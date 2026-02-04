@@ -32,13 +32,17 @@ class RestClient {
     dio.interceptors.add(LogInterceptor(talker: debugTalker));
 
     // Disable certificate check (only for trusted domain)
-    dio.httpClientAdapter = IOHttpClientAdapter(
-      createHttpClient: () {
-        final client = HttpClient();
-        client.badCertificateCallback = (_, _, _) => true;
-        return client;
-      },
-    );
+    final String env =
+        dotEnv.env.getString(EnvConstants.ENV).toUpperCase().trim();
+    if (env != 'PROD') {
+      dio.httpClientAdapter = IOHttpClientAdapter(
+        createHttpClient: () {
+          final client = HttpClient();
+          client.badCertificateCallback = (_, _, _) => true;
+          return client;
+        },
+      );
+    }
 
     /// For response bodies greater than 50KB, a new Isolate will be spawned to
     /// decode the response body to JSON.

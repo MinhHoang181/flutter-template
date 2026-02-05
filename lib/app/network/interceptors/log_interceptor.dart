@@ -10,6 +10,18 @@ import 'package:template/core/constants/network_constants.dart';
 
 const _encoder = JsonEncoder.withIndent('  ');
 
+const _sensitiveKeys = {
+  'password',
+  'token',
+  'access_token',
+  'refresh_token',
+  'otp',
+  'passphrase',
+  'secret',
+  'secret_key',
+  'api_key',
+};
+
 class LogInterceptor extends _AppTalkerDioLogger {
   LogInterceptor({required super.talker})
     : super(
@@ -70,7 +82,7 @@ class _AppTalkerDioLogger extends TalkerDioLogger {
       return;
     }
     try {
-      final message = '${options.uri}';
+      final message = _redactUri(options.uri).toString();
       final httpLog = _DioRequestLog(
         message,
         requestOptions: options.copyWith(data: _convertDataLog(options.data)),
@@ -93,7 +105,7 @@ class _AppTalkerDioLogger extends TalkerDioLogger {
       return;
     }
     try {
-      final message = '${response.requestOptions.uri}';
+      final message = _redactUri(response.requestOptions.uri).toString();
       final httpLog = _DioResponseLog(
         message,
         settings: settings,
@@ -116,7 +128,7 @@ class _AppTalkerDioLogger extends TalkerDioLogger {
       return;
     }
     try {
-      final message = '${err.requestOptions.uri}';
+      final message = _redactUri(err.requestOptions.uri).toString();
       final httpErrorLog = _DioErrorLog(
         message,
         dioException: err,
@@ -177,12 +189,37 @@ class _DioErrorLog extends DioErrorLog {
   }
 }
 
+Uri _redactUri(Uri uri) {
+  if (uri.queryParameters.isEmpty) {
+    return uri;
+  }
+
+  final params = Map<String, dynamic>.from(uri.queryParametersAll);
+  bool changed = false;
+
+  for (final key in params.keys) {
+    if (_sensitiveKeys.contains(key.toLowerCase())) {
+      params[key] = ['*** REDACTED ***'];
+      changed = true;
+    }
+  }
+
+  if (!changed) {
+    return uri;
+  }
+
+  return uri.replace(queryParameters: params);
+}
+
 Object? _convertDataLog(Object? data) {
   if (data is FormData) {
     final buffer = StringBuffer();
 
     for (final field in data.fields) {
-      buffer.write('[${field.key}=${field.value}] ');
+      final value = _sensitiveKeys.contains(field.key.toLowerCase())
+          ? '*** REDACTED ***'
+          : field.value;
+      buffer.write('[${field.key}=$value] ');
     }
 
     for (final entry in data.files) {
@@ -209,24 +246,30 @@ Object? _convertDataLog(Object? data) {
     return '<Stream>';
   }
 
-  if (data is String && data.isLooksLikeDataUriBase64) {
-    return '<Data URI Base64>';
-  }
+  if (data is String) {
+    if (data.isLooksLikeDataUriBase64) {
+      return '<Data URI Base64>';
+    }
 
-  if (data is String && data.isLooksLikeRawBase64()) {
-    return '<Raw Base64>';
+    if (data.isLooksLikeRawBase64()) {
+      return '<Raw Base64>';
+    }
+
+    try {
+      final decoded = jsonDecode(data);
+      if (decoded is Map || decoded is List) {
+        return _convertDataLog(decoded);
+      }
+    } catch (_) {
+      // Not a JSON string
+    }
+
+    return data;
   }
 
   if (data is Map<String, dynamic>) {
     return data.map((key, value) {
-      const sensitiveKeys = {
-        'password',
-        'token',
-        'access_token',
-        'refresh_token',
-        'otp',
-      };
-      if (sensitiveKeys.contains(key.toLowerCase())) {
+      if (_sensitiveKeys.contains(key.toLowerCase())) {
         return MapEntry(key, '*** REDACTED ***');
       }
       return MapEntry(key, _convertDataLog(value));

@@ -5,6 +5,9 @@ Completer<void>? _overlayCompleter;
 final _LoadingOverlay _loadingOverlay = _LoadingOverlay();
 
 extension OverlayExt on _AppExt {
+  static final RegExp _bottomSheetRegex = RegExp('BOTTOMSHEET');
+  static final RegExp _dialogRegex = RegExp('DIALOG');
+
   Future<void> waitCurrentOverlayClose() {
     return _overlayCompleter?.future ?? Future.sync(() => null);
   }
@@ -78,7 +81,7 @@ extension OverlayExt on _AppExt {
       if (number != null && number! <= 0) return true;
 
       if (route is PopupRoute) {
-        if (type.contains(RegExp('BOTTOMSHEET'))) {
+        if (type.contains(_bottomSheetRegex)) {
           if (number != null) {
             number = number! - 1;
           }
@@ -99,7 +102,7 @@ extension OverlayExt on _AppExt {
       if (number != null && number! <= 0) return true;
 
       if (route is PopupRoute) {
-        if (type.contains(RegExp('DIALOG'))) {
+        if (type.contains(_dialogRegex)) {
           if (number != null) {
             number = number! - 1;
           }

@@ -144,7 +144,7 @@ class AppNationalIdValidator extends Validator<String?> {
 
   static String invalid = '$AppNationalIdValidator.invalid';
 
-  static RegExp nationalIdRegex = RegExp(
+  static final RegExp _nationalIdRegex = RegExp(
     r'^[A-Za-z0-9](?:[A-Za-z0-9\/\-\s]{4,18})[A-Za-z0-9]$',
   );
 
@@ -154,7 +154,7 @@ class AppNationalIdValidator extends Validator<String?> {
 
     if (value == null || value.isEmpty) return null;
 
-    if (!nationalIdRegex.hasMatch(value)) {
+    if (!_nationalIdRegex.hasMatch(value)) {
       return {
         invalid: App.text(
           LocaleKeys.core.validate.national_id.invalid,
@@ -311,6 +311,8 @@ class AppPasswordValidator extends Validator<String?> {
   static String lessThanMin = '$AppPasswordValidator.less_than_min';
   static String noNumber = '$AppPasswordValidator.no_number';
 
+  static final RegExp _numberRegex = RegExp('[0-9]');
+
   final int minLength;
 
   final bool containNumber;
@@ -333,7 +335,7 @@ class AppPasswordValidator extends Validator<String?> {
         ),
       };
     }
-    if (containNumber && !value.contains(RegExp('[0-9]'))) {
+    if (containNumber && !value.contains(_numberRegex)) {
       return {
         noNumber: App.text(
           LocaleKeys.core.validate.password.no_number,

@@ -157,10 +157,36 @@ class _AppSelectDropdownMenuState<T> extends State<AppSelectDropdownMenu<T>> {
   }
 
   Widget _buildMenuItem(BuildContext context, T item) {
-    final isSelected = _isSelected(item);
-
-    return InkWell(
+    return _AppSelectMenuItem<T>(
+      item: item,
+      isSelected: _isSelected(item),
+      display: widget.itemDisplay,
       onTap: () => _onTap(item),
+    );
+  }
+
+  Widget _buildDivider(BuildContext context, int index) {
+    return const SizedBox.shrink();
+  }
+}
+
+class _AppSelectMenuItem<T> extends StatelessWidget {
+  const _AppSelectMenuItem({
+    required this.item,
+    required this.isSelected,
+    required this.display,
+    required this.onTap,
+  });
+
+  final T item;
+  final bool isSelected;
+  final String Function(T) display;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.s4,
@@ -172,7 +198,7 @@ class _AppSelectDropdownMenuState<T> extends State<AppSelectDropdownMenu<T>> {
           children: [
             Expanded(
               child: AppText(
-                widget.itemDisplay(item),
+                display(item),
                 style: TextStyle(
                   color: isSelected
                       ? Theme.of(context).colorScheme.primary
@@ -197,10 +223,6 @@ class _AppSelectDropdownMenuState<T> extends State<AppSelectDropdownMenu<T>> {
         ),
       ),
     );
-  }
-
-  Widget _buildDivider(BuildContext context, int index) {
-    return const SizedBox.shrink();
   }
 }
 

@@ -54,11 +54,12 @@ class AppIconState extends BaseIconState {
   @override
   AppIcon get widget => super.widget as AppIcon;
 
+  static final RegExp _iconifyRegex = RegExp(
+    r'^([a-z0-9](?:[a-z0-9-]*[a-z0-9])?):([a-z0-9](?:[a-z0-9-]*[a-z0-9])?)$',
+  );
+
   bool _isIconify(Object? icon) {
-    return icon is String &&
-        RegExp(
-          r'^([a-z0-9](?:[a-z0-9-]*[a-z0-9])?):([a-z0-9](?:[a-z0-9-]*[a-z0-9])?)$',
-        ).hasMatch(icon);
+    return icon is String && _iconifyRegex.hasMatch(icon);
   }
 
   @override

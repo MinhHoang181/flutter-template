@@ -85,6 +85,8 @@ dependencies:
   # Environment & Configuration
   # ========================================
   flutter_dotenv: ^6.0.0
+  flutter_svg: ^2.0.10+1
+  vector_graphics: ^1.1.11
 
   # ========================================
   # Logging & Debugging
@@ -96,6 +98,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mocktail: ^1.0.4
   flutter_lints: ^6.0.0
 
   # ========================================

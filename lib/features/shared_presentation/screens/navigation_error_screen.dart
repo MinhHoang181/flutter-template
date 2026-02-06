@@ -8,6 +8,7 @@ import 'package:template/core/theme/app_fonts.dart';
 import 'package:template/core/theme/app_spacing.dart';
 import 'package:template/gen/locale_keys.gen.dart';
 
+/// A screen that displays an error message when a navigation failure occurs.
 class NavigationErrorScreen extends StatelessWidget {
   const NavigationErrorScreen({super.key, this.error, this.onBackHome});
 

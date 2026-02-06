@@ -4,6 +4,7 @@ import 'package:template/core/presentation/widgets/app_text.dart';
 import 'package:template/core/theme/app_fonts.dart';
 import 'package:template/core/theme/app_theme.dart';
 
+/// A custom app bar widget that implements [PreferredSizeWidget].
 class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AppAppBar({
     super.key,

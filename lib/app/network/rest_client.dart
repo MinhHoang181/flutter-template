@@ -35,10 +35,14 @@ class RestClient {
     final String env =
         dotEnv.env.getString(EnvConstants.ENV).toUpperCase().trim();
     if (env != 'PROD') {
+      final String baseUrl = dotEnv.env.getString(EnvConstants.API_URL);
+      final String trustedHost = Uri.tryParse(baseUrl)?.host ?? '';
+
       dio.httpClientAdapter = IOHttpClientAdapter(
         createHttpClient: () {
           final client = HttpClient();
-          client.badCertificateCallback = (_, _, _) => true;
+          client.badCertificateCallback = (cert, host, port) =>
+              host == trustedHost;
           return client;
         },
       );

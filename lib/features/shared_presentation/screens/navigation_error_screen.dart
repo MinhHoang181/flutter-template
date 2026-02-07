@@ -8,11 +8,15 @@ import 'package:template/core/theme/app_fonts.dart';
 import 'package:template/core/theme/app_spacing.dart';
 import 'package:template/gen/locale_keys.gen.dart';
 
+/// A screen that displays an error message when a navigation error occurs.
 class NavigationErrorScreen extends StatelessWidget {
+  /// Creates a [NavigationErrorScreen].
   const NavigationErrorScreen({super.key, this.error, this.onBackHome});
 
+  /// An optional error message to display.
   final String? error;
 
+  /// A callback that is triggered when the "back to home" button is pressed.
   final void Function(BuildContext context)? onBackHome;
 
   @override

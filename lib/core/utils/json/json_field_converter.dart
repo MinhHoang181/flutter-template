@@ -296,6 +296,11 @@ class JsonFieldConverterUint8ListOrNull
     extends JsonConverter<Uint8List?, dynamic> {
   const JsonFieldConverterUint8ListOrNull();
 
+  static final RegExp _dataUriRegex = RegExp(
+    r'^data:[^;]+;base64,(.*)$',
+    caseSensitive: false,
+  );
+
   @override
   Uint8List? fromJson(dynamic json) {
     final String? stringJson = (json as Object?).toStringOrNull();
@@ -304,11 +309,7 @@ class JsonFieldConverterUint8ListOrNull
     try {
       // Check if it's a Data URI (e.g., "data:image/png;base64,...")
       if (stringJson.isLooksLikeDataUriBase64) {
-        // ignore: deprecated_member_use
-        final match = RegExp(
-          r'^data:[^;]+;base64,(.*)$',
-          caseSensitive: false,
-        ).firstMatch(stringJson);
+        final match = _dataUriRegex.firstMatch(stringJson);
         if (match != null) {
           final base64String = match.group(1);
           if (base64String != null && base64String.isNotEmpty) {

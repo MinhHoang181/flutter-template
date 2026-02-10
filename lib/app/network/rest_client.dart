@@ -31,10 +31,10 @@ class RestClient {
     dio.interceptors.add(ApiErrorInterceptor());
     dio.interceptors.add(LogInterceptor(talker: debugTalker));
 
-    // Disable certificate check (only for trusted domain)
+    // Disable certificate check (only for trusted non-prod environments)
     final String env =
         dotEnv.env.getString(EnvConstants.ENV).toUpperCase().trim();
-    if (env != 'PROD') {
+    if (env == 'DEV' || env == 'STAGING') {
       dio.httpClientAdapter = IOHttpClientAdapter(
         createHttpClient: () {
           final client = HttpClient();

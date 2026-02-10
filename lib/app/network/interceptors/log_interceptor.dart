@@ -20,6 +20,11 @@ const _sensitiveKeys = {
   'secret',
   'secret_key',
   'api_key',
+  'auth_token',
+  'authorization',
+  'cookie',
+  'set-cookie',
+  'x-auth-token',
 };
 
 class LogInterceptor extends _AppTalkerDioLogger {
@@ -41,7 +46,7 @@ class LogInterceptor extends _AppTalkerDioLogger {
           printErrorData: true,
           printErrorMessage: false,
           // custom log
-          hiddenHeaders: {ApiHeaders.authorization},
+          hiddenHeaders: {ApiHeaders.authorization, ..._sensitiveKeys},
           responseDataConverter: (response) {
             final data = _convertDataLog(response.data);
 
@@ -85,7 +90,10 @@ class _AppTalkerDioLogger extends TalkerDioLogger {
       final message = _redactUri(options.uri).toString();
       final httpLog = _DioRequestLog(
         message,
-        requestOptions: options.copyWith(data: _convertDataLog(options.data)),
+        requestOptions: options.copyWith(
+          data: _convertDataLog(options.data),
+          headers: _redactHeaders(options.headers),
+        ),
         settings: settings,
       );
       _talker.logCustom(httpLog);
@@ -131,7 +139,16 @@ class _AppTalkerDioLogger extends TalkerDioLogger {
       final message = _redactUri(err.requestOptions.uri).toString();
       final httpErrorLog = _DioErrorLog(
         message,
-        dioException: err,
+        dioException: DioException(
+          requestOptions: err.requestOptions.copyWith(
+            headers: _redactHeaders(err.requestOptions.headers),
+          ),
+          response: err.response,
+          type: err.type,
+          error: err.error,
+          stackTrace: err.stackTrace,
+          message: err.message,
+        ),
         settings: settings,
       );
       _talker.logCustom(httpErrorLog);
@@ -209,6 +226,19 @@ Uri _redactUri(Uri uri) {
   }
 
   return uri.replace(queryParameters: params);
+}
+
+Map<String, dynamic> _redactHeaders(Map<String, dynamic> headers) {
+  if (headers.isEmpty) {
+    return headers;
+  }
+
+  return headers.map((key, value) {
+    if (_sensitiveKeys.contains(key.toLowerCase())) {
+      return MapEntry(key, '*** REDACTED ***');
+    }
+    return MapEntry(key, value);
+  });
 }
 
 Object? _convertDataLog(Object? data) {

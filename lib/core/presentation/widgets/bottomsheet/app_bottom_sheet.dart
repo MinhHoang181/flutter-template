@@ -41,7 +41,11 @@ class AppBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
-        children: [?header, content, ?bottom],
+        children: [
+          if (header != null) header!,
+          content,
+          if (bottom != null) bottom!,
+        ],
       ),
     );
   }

@@ -169,7 +169,7 @@ class _LoadingOverlay {
   @protected
   OverlayEntry opacityBuilder() => OverlayEntry(
     builder: (context) {
-      return const Opacity(opacity: 0.5, child: ColoredBox(color: Colors.black));
+      return const ColoredBox(color: Color(0x80000000));
     },
   );
 

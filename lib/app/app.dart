@@ -22,10 +22,12 @@ part 'extensions/overlay.dart';
 part 'extensions/utilities.dart';
 part 'extensions/text.dart';
 
+/// Namespace for global application extensions and utilities.
 class _AppExt {
   const _AppExt();
 }
 
+/// Global instance of [_AppExt] providing access to app-wide functionality.
 const App = _AppExt();
 
 final Completer<void> startAppCompleter = Completer<void>();

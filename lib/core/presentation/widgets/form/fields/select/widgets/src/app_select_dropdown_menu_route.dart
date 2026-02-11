@@ -96,20 +96,27 @@ Future<T?> _showMenu<T>({
 
 // Positioning of the menu on the screen.
 class _PopupMenuRouteLayout extends SingleChildLayoutDelegate {
-  _PopupMenuRouteLayout(this.context, this.padding, this.position);
+  _PopupMenuRouteLayout({
+    required this.position,
+    required this.padding,
+    required this.viewInsets,
+  });
+
   // Rectangle of underlying button, relative to the overlay's dimensions.
   final RelativeRect position;
-  final BuildContext context;
 
   // The padding of unsafe area.
-  EdgeInsets padding;
+  final EdgeInsets padding;
+
+  // The view insets of the screen (e.g. keyboard height).
+  final EdgeInsets viewInsets;
 
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     //keyBoardHeight is height of keyboard if showing
-    final double keyBoardHeight = MediaQuery.of(context).viewInsets.bottom;
-    final double safeAreaTop = MediaQuery.of(context).padding.top;
-    final double safeAreaBottom = MediaQuery.of(context).padding.bottom;
+    final double keyBoardHeight = viewInsets.bottom;
+    final double safeAreaTop = padding.top;
+    final double safeAreaBottom = padding.bottom;
     final double safeAreaTotal = safeAreaTop + safeAreaBottom;
 
     return BoxConstraints.loose(
@@ -123,7 +130,7 @@ class _PopupMenuRouteLayout extends SingleChildLayoutDelegate {
   @override
   Offset getPositionForChild(Size size, Size childSize) {
     //keyBoardHeight is height of keyboard if showing
-    final double keyBoardHeight = MediaQuery.of(context).viewInsets.bottom;
+    final double keyBoardHeight = viewInsets.bottom;
 
     double x = position.left;
 
@@ -147,7 +154,9 @@ class _PopupMenuRouteLayout extends SingleChildLayoutDelegate {
 
   @override
   bool shouldRelayout(_PopupMenuRouteLayout oldDelegate) {
-    return true;
+    return oldDelegate.position != position ||
+        oldDelegate.padding != padding ||
+        oldDelegate.viewInsets != viewInsets;
   }
 }
 
@@ -206,7 +215,6 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
       borderOnForeground: menuModeProps.borderOnForeground,
       child: child,
     );
-    final MediaQueryData mediaQuery = MediaQuery.of(context);
 
     //handle menu margin
     var pos = position;
@@ -221,7 +229,11 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
     }
 
     return CustomSingleChildLayout(
-      delegate: _PopupMenuRouteLayout(context, mediaQuery.padding, pos),
+      delegate: _PopupMenuRouteLayout(
+        position: pos,
+        padding: MediaQuery.paddingOf(context),
+        viewInsets: MediaQuery.viewInsetsOf(context),
+      ),
       child: capturedThemes.wrap(menu),
     );
   }

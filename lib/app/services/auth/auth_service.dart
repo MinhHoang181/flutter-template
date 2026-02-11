@@ -17,6 +17,12 @@ import 'models/jwt_token.dart';
 
 enum AuthStatus { authorized, unauthorized }
 
+/// A service that handles user authentication and maintains the authorization state.
+///
+/// This service provides methods for authenticating with credentials,
+/// refreshing tokens automatically, and managing the user's login status
+/// through a broadcast stream. It acts as the central authority for
+/// authentication logic within the application.
 @Singleton()
 class AuthService {
   AuthService({

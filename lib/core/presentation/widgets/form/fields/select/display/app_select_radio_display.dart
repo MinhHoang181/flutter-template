@@ -124,32 +124,36 @@ class _RadioFieldState<TValue, TItem>
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: widget.enabled ? 1.0 : 0.5,
-      child: IgnorePointer(
-        ignoring: !widget.enabled,
-        child: RadioGroup<TValue>(
-          groupValue: widget.value,
-          onChanged: widget.onChanged,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            spacing: AppSpacing.s2,
-            children: items
-                .map(
-                  (item) => _RadioItem<TValue, TItem>(
-                    item: item,
-                    itemValue: widget.itemValue,
-                    itemDisplay: widget.itemDisplay,
-                    textStyle: widget.textStyle,
-                    onChanged: widget.onChanged,
-                  ),
-                )
-                .toList(),
-          ),
+    final Widget content = IgnorePointer(
+      ignoring: !widget.enabled,
+      child: RadioGroup<TValue>(
+        groupValue: widget.value,
+        onChanged: widget.onChanged,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          spacing: AppSpacing.s2,
+          children:
+              items
+                  .map(
+                    (item) => _RadioItem<TValue, TItem>(
+                      item: item,
+                      itemValue: widget.itemValue,
+                      itemDisplay: widget.itemDisplay,
+                      textStyle: widget.textStyle,
+                      onChanged: widget.onChanged,
+                    ),
+                  )
+                  .toList(),
         ),
       ),
     );
+
+    if (widget.enabled) {
+      return content;
+    }
+
+    return Opacity(opacity: 0.5, child: content);
   }
 }
 

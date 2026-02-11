@@ -143,48 +143,54 @@ class __FieldState<TItem> extends State<_Field<TItem>> {
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: widget.enabled ? 1.0 : 0.5,
-      child: IgnorePointer(
-        ignoring: !widget.enabled,
-        child: InputDecorator(
-          decoration: AppInputDecoration.basic(
-            errorText: widget.errorText,
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.zero,
-          ),
-          child: Wrap(
-            spacing: AppSpacing.s2,
-            children: items.map((item) {
-              final bool isSelected = widget.itemIdentity != null
-                  ? widget.selected.any(
-                      (e) =>
-                          widget.itemIdentity!(e) == widget.itemIdentity!(item),
-                    )
-                  : widget.selected.contains(item);
+    final Widget content = IgnorePointer(
+      ignoring: !widget.enabled,
+      child: InputDecorator(
+        decoration: AppInputDecoration.basic(
+          errorText: widget.errorText,
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.zero,
+        ),
+        child: Wrap(
+          spacing: AppSpacing.s2,
+          children:
+              items.map((item) {
+                final bool isSelected =
+                    widget.itemIdentity != null
+                        ? widget.selected.any(
+                          (e) =>
+                              widget.itemIdentity!(e) ==
+                              widget.itemIdentity!(item),
+                        )
+                        : widget.selected.contains(item);
 
-              return FilterChip(
-                label: AppText(widget.itemDisplay(item)),
-                labelStyle: (widget.textStyle ?? AppFonts.size14Medium)
-                    .copyWith(
-                      color: isSelected ? AppColors.white : AppColors.gray950,
-                    ),
-                selected: isSelected,
-                onSelected: (selected) => widget.onTap(item, selected),
-                backgroundColor: AppColors.gray100,
-                selectedColor: AppColors.blue600,
-                showCheckmark: false,
-                elevation: 0,
-                pressElevation: 0,
-                side: BorderSide.none,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(AppRadius.full),
-                ),
-              );
-            }).toList(),
-          ),
+                return FilterChip(
+                  label: AppText(widget.itemDisplay(item)),
+                  labelStyle: (widget.textStyle ?? AppFonts.size14Medium)
+                      .copyWith(
+                        color: isSelected ? AppColors.white : AppColors.gray950,
+                      ),
+                  selected: isSelected,
+                  onSelected: (selected) => widget.onTap(item, selected),
+                  backgroundColor: AppColors.gray100,
+                  selectedColor: AppColors.blue600,
+                  showCheckmark: false,
+                  elevation: 0,
+                  pressElevation: 0,
+                  side: BorderSide.none,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(AppRadius.full),
+                  ),
+                );
+              }).toList(),
         ),
       ),
     );
+
+    if (widget.enabled) {
+      return content;
+    }
+
+    return Opacity(opacity: 0.5, child: content);
   }
 }

@@ -209,6 +209,9 @@ class _CoreValidatePasswordGen {
   const _CoreValidatePasswordGen();
   final String less_than_min = 'core.validate.password.less_than_min';
   final String no_number = 'core.validate.password.no_number';
+  final String no_uppercase = 'core.validate.password.no_uppercase';
+  final String no_lowercase = 'core.validate.password.no_lowercase';
+  final String no_special_char = 'core.validate.password.no_special_char';
 }
 
 class _CoreValidatePhoneGen {

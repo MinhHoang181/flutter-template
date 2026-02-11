@@ -11,6 +11,9 @@ import '../../../../bottomsheet/app_bottom_sheet.dart';
 import '../data_source/app_select_data_source.dart';
 import 'app_select_paginated_list_view.dart';
 
+part 'src/app_select_bottom_sheet_bottom_bar.dart';
+part 'src/app_select_bottom_sheet_item.dart';
+
 enum _AppSelectBottomSheetMode { single, multiple }
 
 typedef AppSelectBottomSheetItemDisplay<T> = String Function(T item);
@@ -282,7 +285,12 @@ class _AppSelectBottomSheetState<T> extends State<AppSelectBottomSheet<T>> {
       content: Flexible(child: _buildList(context)),
       // Only show bottom bar for multiple select
       bottom: widget.mode == _AppSelectBottomSheetMode.multiple
-          ? AppBottomSheetButton(child: _bottomBar(context))
+          ? AppBottomSheetButton(
+              child: _AppSelectBottomSheetBottomBar(
+                onReset: () => _onReset(context),
+                onConfirm: () => _onConfirm(context),
+              ),
+            )
           : null,
     );
   }
@@ -295,7 +303,7 @@ class _AppSelectBottomSheetState<T> extends State<AppSelectBottomSheet<T>> {
       showSearchBar: widget.showSearchBar,
       padding: EdgeInsets.only(bottom: _getListBottomSafePadding(context)),
       itemBuilder: (context, item) {
-        return AppSelectBottomSheetItem<T>(
+        return _AppSelectBottomSheetItem<T>(
           item: item,
           display: widget.itemDisplay,
           minTileHeight: widget.minTileHeight,
@@ -318,100 +326,4 @@ class _AppSelectBottomSheetState<T> extends State<AppSelectBottomSheet<T>> {
     );
   }
 
-  Widget _bottomBar(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      spacing: AppSpacing.s4,
-      children: [
-        Expanded(
-          child: AppButton.filled(
-            label: context.text(
-              'core.bottomsheet.select_bottom_sheet.buttons.reset',
-              defaultValue: 'Đặt lại',
-            ),
-            style: AppFilledButtonStyle.secondary,
-            onPressed: () {
-              _onReset(context);
-            },
-          ),
-        ),
-        Expanded(
-          child: AppButton.filled(
-            label: context.text(
-              'core.bottomsheet.select_bottom_sheet.buttons.confirm',
-              defaultValue: 'Hoàn tất',
-            ),
-            onPressed: () {
-              _onConfirm(context);
-            },
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class AppSelectBottomSheetItem<T> extends StatelessWidget {
-  const AppSelectBottomSheetItem({
-    super.key,
-    required this.item,
-    required this.display,
-    required this.selected,
-    required this.onTap,
-    required this.minTileHeight,
-    this.leadingBuilder,
-    this.trailingBuilder,
-  });
-
-  final T item;
-
-  final double minTileHeight;
-
-  final bool selected;
-
-  final String Function(T item) display;
-
-  final AppSelectBottomSheetItemLeadingBuilder<T>? leadingBuilder;
-
-  final AppSelectBottomSheetItemTrailingBuilder<T>? trailingBuilder;
-
-  final AppSelectBottomSheetItemOnTap<T> onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      child: SizedBox(
-        height: minTileHeight,
-        child: ListTile(
-          tileColor: Theme.of(context).colorScheme.surface,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.s4,
-            vertical: 0,
-          ),
-          leading: leadingBuilder?.call(item, selected),
-          title: AppText(
-            display(item),
-            style: AppFonts.size14Medium.copyWith(
-              color: selected
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.onSurface,
-            ),
-            maxLines: null,
-          ),
-          trailing:
-              trailingBuilder?.call(item, selected) ??
-              (selected
-                  ? Icon(
-                      Icons.check,
-                      size: 16,
-                      color: Theme.of(context).colorScheme.primary,
-                    )
-                  : null),
-          onTap: () => onTap(item, selected),
-        ),
-      ),
-    );
-  }
 }

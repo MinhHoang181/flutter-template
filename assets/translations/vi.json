@@ -86,7 +86,10 @@
             },
             "password": {
                 "less_than_min": "Mật khẩu phải có ít nhất {min} ký tự",
-                "no_number": "Mật khẩu phải có ít nhất 1 số"
+                "no_number": "Mật khẩu phải có ít nhất 1 số",
+                "no_uppercase": "Mật khẩu phải có ít nhất 1 chữ hoa",
+                "no_lowercase": "Mật khẩu phải có ít nhất 1 chữ thường",
+                "no_special_char": "Mật khẩu phải có ít nhất 1 ký tự đặc biệt"
             },
             "confirm_password": {
                 "not_match": "Mật khẩu không khớp"

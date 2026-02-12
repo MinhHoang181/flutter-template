@@ -22,6 +22,9 @@ class AppValidators {
     AppOtpValidator.invalid: (error) => error.toString(),
     AppPasswordValidator.lessThanMin: (error) => error.toString(),
     AppPasswordValidator.noNumber: (error) => error.toString(),
+    AppPasswordValidator.noUppercase: (error) => error.toString(),
+    AppPasswordValidator.noLowercase: (error) => error.toString(),
+    AppPasswordValidator.noSpecialChar: (error) => error.toString(),
     AppConfirmPasswordValidator.notMatch: (error) => error.toString(),
     AppDateValidator.lessThanMin: (error) => error.toString(),
     AppDateValidator.greaterThanMax: (error) => error.toString(),
@@ -306,16 +309,34 @@ class AppOtpValidator extends Validator<String?> {
 }
 
 class AppPasswordValidator extends Validator<String?> {
-  const AppPasswordValidator({this.minLength = 8, this.containNumber = false});
+  const AppPasswordValidator({
+    this.minLength = 8,
+    this.containNumber = false,
+    this.containUppercase = false,
+    this.containLowercase = false,
+    this.containSpecialChar = false,
+  });
 
   static String lessThanMin = '$AppPasswordValidator.less_than_min';
   static String noNumber = '$AppPasswordValidator.no_number';
+  static String noUppercase = '$AppPasswordValidator.no_uppercase';
+  static String noLowercase = '$AppPasswordValidator.no_lowercase';
+  static String noSpecialChar = '$AppPasswordValidator.no_special_char';
 
   static final RegExp _numberRegex = RegExp('[0-9]');
+  static final RegExp _uppercaseRegex = RegExp('[A-Z]');
+  static final RegExp _lowercaseRegex = RegExp('[a-z]');
+  static final RegExp _specialCharRegex = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
 
   final int minLength;
 
   final bool containNumber;
+
+  final bool containUppercase;
+
+  final bool containLowercase;
+
+  final bool containSpecialChar;
 
   @override
   Map<String, dynamic>? validate(AbstractControl<String?> control) {
@@ -340,6 +361,30 @@ class AppPasswordValidator extends Validator<String?> {
         noNumber: App.text(
           LocaleKeys.core.validate.password.no_number,
           defaultValue: 'Mật khẩu phải có ít nhất 1 số',
+        ),
+      };
+    }
+    if (containUppercase && !value.contains(_uppercaseRegex)) {
+      return {
+        noUppercase: App.text(
+          LocaleKeys.core.validate.password.no_uppercase,
+          defaultValue: 'Mật khẩu phải có ít nhất 1 chữ hoa',
+        ),
+      };
+    }
+    if (containLowercase && !value.contains(_lowercaseRegex)) {
+      return {
+        noLowercase: App.text(
+          LocaleKeys.core.validate.password.no_lowercase,
+          defaultValue: 'Mật khẩu phải có ít nhất 1 chữ thường',
+        ),
+      };
+    }
+    if (containSpecialChar && !value.contains(_specialCharRegex)) {
+      return {
+        noSpecialChar: App.text(
+          LocaleKeys.core.validate.password.no_special_char,
+          defaultValue: 'Mật khẩu phải có ít nhất 1 ký tự đặc biệt',
         ),
       };
     }

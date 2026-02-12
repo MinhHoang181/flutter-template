@@ -18,15 +18,11 @@ void main() async {
 }
 
 Widget _app() {
-  Widget app = const _App();
-
-  // localization
-  app = AppLocalization(child: app);
-
-  // theme management
-  app = AppThemeManager(child: app);
-
-  return app;
+  return const AppThemeManager(
+    child: AppLocalization(
+      child: _App(),
+    ),
+  );
 }
 
 Future<void> _preRunApp() async {
@@ -57,10 +53,18 @@ class _App extends StatefulWidget {
 }
 
 class _AppState extends State<_App> with WidgetsBindingObserver {
+  late final String _env;
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    _env = getIt
+        .get<DotEnv>()
+        .env
+        .getString(EnvConstants.ENV)
+        .toUpperCase()
+        .trim();
   }
 
   @override
@@ -88,16 +92,9 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    final String env = getIt
-        .get<DotEnv>()
-        .env
-        .getString(EnvConstants.ENV)
-        .toUpperCase()
-        .trim();
-
     return FlavorBanner(
-      isShow: env != 'PROD',
-      env: env,
+      isShow: _env != 'PROD',
+      env: _env,
       child: MaterialApp.router(
         // app theme manager
         theme: context.lightTheme,

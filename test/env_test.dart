@@ -16,11 +16,6 @@ void main() async {
     expect(env != null && env.isNotEmpty, true);
   });
 
-  test('Check has environment', () {
-    final String? env = data[EnvConstants.ENV] as String?;
-    expect(env != null && env.isNotEmpty, true);
-  });
-
   test('Check has api url', () {
     final String? apiUrl = data[EnvConstants.API_URL] as String?;
     expect(apiUrl != null && apiUrl.isNotEmpty, true);

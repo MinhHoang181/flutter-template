@@ -20,6 +20,11 @@ const _sensitiveKeys = {
   'secret',
   'secret_key',
   'api_key',
+  'auth_token',
+  'authorization',
+  'cookie',
+  'set-cookie',
+  'x-auth-token',
 };
 
 class LogInterceptor extends _AppTalkerDioLogger {
@@ -31,17 +36,17 @@ class LogInterceptor extends _AppTalkerDioLogger {
           printRequestData: true,
           printRequestExtra: false,
           // response
-          printResponseHeaders: false,
+          printResponseHeaders: true,
           printResponseData: true,
           printResponseTime: true,
           printResponseMessage: false,
           printResponseRedirects: false,
           // error
-          printErrorHeaders: false,
+          printErrorHeaders: true,
           printErrorData: true,
           printErrorMessage: false,
           // custom log
-          hiddenHeaders: {ApiHeaders.authorization},
+          hiddenHeaders: {},
           responseDataConverter: (response) {
             final data = _convertDataLog(response.data);
 
@@ -85,7 +90,12 @@ class _AppTalkerDioLogger extends TalkerDioLogger {
       final message = _redactUri(options.uri).toString();
       final httpLog = _DioRequestLog(
         message,
-        requestOptions: options.copyWith(data: _convertDataLog(options.data)),
+        requestOptions: options.copyWith(
+          data: _convertDataLog(options.data),
+          headers: _convertDataLog(options.headers) as Map<String, dynamic>?,
+          queryParameters:
+              _convertDataLog(options.queryParameters) as Map<String, dynamic>?,
+        ),
         settings: settings,
       );
       _talker.logCustom(httpLog);
@@ -109,7 +119,7 @@ class _AppTalkerDioLogger extends TalkerDioLogger {
       final httpLog = _DioResponseLog(
         message,
         settings: settings,
-        response: response,
+        response: _redactResponse(response),
       );
       _talker.logCustom(httpLog);
     } catch (_) {
@@ -131,13 +141,58 @@ class _AppTalkerDioLogger extends TalkerDioLogger {
       final message = _redactUri(err.requestOptions.uri).toString();
       final httpErrorLog = _DioErrorLog(
         message,
-        dioException: err,
+        dioException: DioException(
+          requestOptions: err.requestOptions.copyWith(
+            data: _convertDataLog(err.requestOptions.data),
+            headers: _convertDataLog(err.requestOptions.headers)
+                as Map<String, dynamic>?,
+            queryParameters:
+                _convertDataLog(err.requestOptions.queryParameters)
+                    as Map<String, dynamic>?,
+          ),
+          response: err.response != null ? _redactResponse(err.response!) : null,
+          error: err.error,
+          type: err.type,
+          stackTrace: err.stackTrace,
+          message: err.message,
+        ),
         settings: settings,
       );
       _talker.logCustom(httpErrorLog);
     } catch (_) {
       //pass
     }
+  }
+
+  Response _redactResponse(Response response) {
+    return Response(
+      requestOptions: response.requestOptions.copyWith(
+        data: _convertDataLog(response.requestOptions.data),
+        headers: _convertDataLog(response.requestOptions.headers)
+            as Map<String, dynamic>?,
+        queryParameters: _convertDataLog(response.requestOptions.queryParameters)
+            as Map<String, dynamic>?,
+      ),
+      data: response.data,
+      headers: _redactHeaders(response.headers),
+      statusCode: response.statusCode,
+      statusMessage: response.statusMessage,
+      isRedirect: response.isRedirect,
+      redirects: response.redirects,
+      extra: response.extra,
+    );
+  }
+
+  Headers _redactHeaders(Headers headers) {
+    final redacted = Headers();
+    headers.forEach((name, values) {
+      if (_sensitiveKeys.contains(name.toLowerCase())) {
+        redacted.set(name, '*** REDACTED ***');
+      } else {
+        redacted.set(name, values);
+      }
+    });
+    return redacted;
   }
 }
 

@@ -1,3 +1,9 @@
+/// A utility class that ensures only one instance of an asynchronous operation
+/// is in-flight at any given time for a specific task.
+///
+/// When multiple calls to [fetch] are made while an operation is still running,
+/// they will all receive the same [Future] and thus the same result, preventing
+/// redundant requests or redundant processing.
 class AsyncDeduplicator<T> {
   Future<T>? _inflight;
 

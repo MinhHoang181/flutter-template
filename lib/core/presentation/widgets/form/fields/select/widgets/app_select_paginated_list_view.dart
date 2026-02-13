@@ -9,6 +9,8 @@ import '../../../../app_text.dart';
 import '../base/app_select_typedefs.dart';
 import '../data_source/app_select_data_source.dart';
 
+part 'src/app_select_paginated_list_view_states.dart';
+
 /// Reusable widget to display a paginated list of items in select popups
 ///
 /// Features:
@@ -246,44 +248,17 @@ class _AppSelectPaginatedListViewState<T>
   Widget _buildContent(BuildContext context) {
     // Show error state
     if (_error != null && _allItems.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.all(AppSpacing.s4),
-        child: Center(
-          child: AppText(
-            _error,
-            style: AppFonts.size18Semi,
-            textAlign: TextAlign.center,
-            maxLines: null,
-          ),
-        ),
-      );
+      return _AppSelectPaginatedListViewError(error: _error!);
     }
 
     // Show empty state
     if (_allItems.isEmpty && !_isLoading) {
-      return Padding(
-        padding: const EdgeInsets.all(AppSpacing.s4),
-        child: Center(
-          child: AppText(
-            widget.emptyMessage ??
-                context.text(
-                  LocaleKeys.core.empty,
-                  defaultValue: 'Không có dữ liệu',
-                ),
-            style: AppFonts.size18Semi,
-            textAlign: TextAlign.center,
-            maxLines: null,
-          ),
-        ),
-      );
+      return _AppSelectPaginatedListViewEmpty(message: widget.emptyMessage);
     }
 
     // Show loading state for initial load
     if (_allItems.isEmpty && _isLoading) {
-      return const Padding(
-        padding: EdgeInsets.all(AppSpacing.s4),
-        child: Center(child: CircularProgressIndicator()),
-      );
+      return const _AppSelectPaginatedListViewLoading();
     }
 
     return ListView.separated(

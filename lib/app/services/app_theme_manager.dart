@@ -13,7 +13,7 @@ class AppThemeManager extends StatelessWidget {
     await ThemeManager.ensureInitialized();
   }
 
-  static List<ThemeMode> get supportedModes => [ThemeMode.light];
+  static List<ThemeMode> get supportedModes => const [ThemeMode.light];
 
   @override
   Widget build(BuildContext context) {

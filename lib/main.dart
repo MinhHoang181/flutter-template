@@ -126,11 +126,6 @@ class _AppState extends State<_App> with WidgetsBindingObserver {
     );
 
     // no scaling text
-    child = MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
-      child: child,
-    );
-
-    return child;
+    return MediaQuery.withNoTextScaling(child: child);
   }
 }

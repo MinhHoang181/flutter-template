@@ -1,3 +1,4 @@
+/// A utility class for retrying asynchronous operations with a maximum number of attempts and a delay between them.
 class AsyncRetry<T> {
   AsyncRetry({
     required this.maxAttempts,

@@ -164,23 +164,12 @@ class __FieldState<TItem> extends State<_Field<TItem>> {
                         )
                         : widget.selected.contains(item);
 
-                return FilterChip(
-                  label: AppText(widget.itemDisplay(item)),
-                  labelStyle: (widget.textStyle ?? AppFonts.size14Medium)
-                      .copyWith(
-                        color: isSelected ? AppColors.white : AppColors.gray950,
-                      ),
-                  selected: isSelected,
-                  onSelected: (selected) => widget.onTap(item, selected),
-                  backgroundColor: AppColors.gray100,
-                  selectedColor: AppColors.blue600,
-                  showCheckmark: false,
-                  elevation: 0,
-                  pressElevation: 0,
-                  side: BorderSide.none,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(AppRadius.full),
-                  ),
+                return _ChipItem<TItem>(
+                  item: item,
+                  itemDisplay: widget.itemDisplay,
+                  isSelected: isSelected,
+                  onTap: widget.onTap,
+                  textStyle: widget.textStyle,
                 );
               }).toList(),
         ),
@@ -192,5 +181,47 @@ class __FieldState<TItem> extends State<_Field<TItem>> {
     }
 
     return Opacity(opacity: 0.5, child: content);
+  }
+}
+
+class _ChipItem<TItem> extends StatelessWidget {
+  const _ChipItem({
+    super.key,
+    required this.item,
+    required this.itemDisplay,
+    required this.isSelected,
+    required this.onTap,
+    this.textStyle,
+  });
+
+  final TItem item;
+
+  final AppItemDisplay<TItem> itemDisplay;
+
+  final bool isSelected;
+
+  final void Function(TItem item, bool selected) onTap;
+
+  final TextStyle? textStyle;
+
+  @override
+  Widget build(BuildContext context) {
+    return FilterChip(
+      label: AppText(itemDisplay(item)),
+      labelStyle: (textStyle ?? AppFonts.size14Medium).copyWith(
+        color: isSelected ? AppColors.white : AppColors.gray950,
+      ),
+      selected: isSelected,
+      onSelected: (selected) => onTap(item, selected),
+      backgroundColor: AppColors.gray100,
+      selectedColor: AppColors.blue600,
+      showCheckmark: false,
+      elevation: 0,
+      pressElevation: 0,
+      side: BorderSide.none,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(AppRadius.full),
+      ),
+    );
   }
 }
